@@ -32,6 +32,7 @@ namespace Group_Project
                     case "go through passage": //Ditto
                         RoomC();
                         break;
+                    case "?":
                     case "help":                //If they ask for help
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
@@ -59,8 +60,8 @@ namespace Group_Project
         {
             Console.WriteLine("You are in the help area");
             Console.WriteLine("Press any key to continue");
-            Console.Clear();
             Pause();
+            Console.Clear();
             //Have some general guidance for what stuff the program is looking for
         }
         public static void Pause() //Because I'm lazy and Pause(); is faster to type and doesn't cause issues if I use it multiple times.
