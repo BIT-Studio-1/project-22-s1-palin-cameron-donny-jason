@@ -7,6 +7,10 @@ namespace Group_Project
         static void Main(string[] args)
         {
             string[] inventory = new string[3];
+            inventory[0] = " ";
+            inventory[1] = " ";
+            inventory[2] = " ";
+
             RoomA(ref inventory);
         }
         public static void RoomA(ref string[] inventory)
@@ -20,6 +24,11 @@ namespace Group_Project
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
                 {
+                    case "key":
+                    case "grab":
+                    case "pick up key":
+                        PickUp(ref inventory, "key");
+                        break;
                     case "left":
                     case "west":
                     case "door":
@@ -59,15 +68,22 @@ namespace Group_Project
         }
         public static void PickUp(ref string[] inventory, string item)
         {
-            bool full = true;
+            bool full = true, added = false;
             for (int i = 0; i < inventory.Length; i++)
             {
-                if (inventory[i] == "")
+                if ((inventory[i] == " ") && (added != true))
                 {
                     inventory[i] = item;
+                    added = true;
                     full = false;
+                    Console.WriteLine($"{item} added to inventory.");
                 }
             }
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                Console.WriteLine($"Slot {i + 1}: {inventory[i]}");
+            }
+            Pause();
             if (full == true)
             {
                 Console.WriteLine("Your inventory is full.");
