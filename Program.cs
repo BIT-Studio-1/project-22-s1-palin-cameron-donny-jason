@@ -16,15 +16,32 @@ namespace Group_Project
         }
         public static void RoomA(ref string[] inventory)
         {
-            bool fail;
+            bool fail, keyTaken = false;
             string temp;
             do
             {
                 Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
+                if (keyTaken == false)
+                {
+                    Console.WriteLine("There is also a key on the floor");
+                }
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
                 {
+                    case "key":
+                    case "pick up":
+                        if (keyTaken == false)
+                        {
+                            PickUp(ref inventory, "Key");
+                            keyTaken = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have already picked up the key");
+                        }
+                        fail = true;
+                        break;
                     case "left":
                     case "west":
                     case "door":
