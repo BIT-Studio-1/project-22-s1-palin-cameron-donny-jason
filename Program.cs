@@ -6,9 +6,10 @@ namespace Group_Project
     {
         static void Main(string[] args)
         {
-            RoomA();
+            string[] inventory = new string[3];
+            RoomA(ref inventory);
         }
-        public static void RoomA()
+        public static void RoomA(ref string[] inventory)
         {
             bool fail;
             string temp;
@@ -55,6 +56,55 @@ namespace Group_Project
             Console.WriteLine("You are in room C");
             Pause();
             //This is just here to ensure that you have made it to room c. Fill out later
+        }
+        public static void PickUp(ref string[] inventory, string item)
+        {
+            bool full = true;
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] == "")
+                {
+                    inventory[i] = item;
+                    full = false;
+                }
+            }
+            if (full == true)
+            {
+                Console.WriteLine("Your inventory is full.");
+                for (int i = 0; i < inventory.Length; i++)
+                {
+                    Console.WriteLine($"Slot {i + 1}: {inventory[i]}");
+                }
+                bool again = false;
+                do
+                {
+                    Console.WriteLine("Would you like to drop slot 1, slot 2, slot 3, or nothing: ");
+                    string drop = Console.ReadLine().ToLower();
+                    switch (drop)
+                    {
+                        case "1":
+                            Console.WriteLine($"Dropping {inventory[0]}");
+                            //swap item
+                            break;
+                        case "2":
+                            Console.WriteLine($"Dropping {inventory[1]}");
+                            //swap item
+                            break;
+                        case "3":
+                            Console.WriteLine($"Dropping {inventory[2]}");
+                            //swap item
+                            break;
+                        case "nothing":
+                            Console.WriteLine($"Keeping the same inventory");
+                            break;
+                        default:
+                            Console.WriteLine("Error. Input not recognized. Please try again.");
+                            again = true;
+                            break;
+                    }
+                } while (again == true);
+
+            }
         }
         public static void Help()
         {
