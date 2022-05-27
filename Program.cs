@@ -4,17 +4,19 @@ namespace Group_Project
 {
     internal class Program
     {
+        public static string[] inventory = { " ", " ", " " };
+
         static void Main(string[] args)
         {
-            string[] inventory = {" ", " ", " "};
+          
             Intro();
-            RoomA(ref inventory);
+            RoomA();
         }
         public static void Intro()
         {
             //Put an intro here!
         }
-        public static void RoomA(ref string[] inventory)
+        public static void RoomA()
         {
             bool fail, keyTaken = false;
             string temp;
@@ -33,7 +35,7 @@ namespace Group_Project
                     case "pick up":
                         if (keyTaken == false)
                         {
-                            PickUp(ref inventory, "Key");
+                            PickUp("Key");
                             keyTaken = true;
                         }
                         else
@@ -79,7 +81,7 @@ namespace Group_Project
             Pause();
             //This is just here to ensure that you have made it to room c. Fill out later
         }
-        public static void PickUp(ref string[] inventory, string item)
+        public static void PickUp(string item)
         {
             bool full = true, added = false;
             for (int i = 0; i < inventory.Length; i++)
