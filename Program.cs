@@ -110,15 +110,15 @@ namespace Group_Project
                     {
                         case "1":
                             Console.WriteLine($"Dropping {inventory[0]}");
-                            //swap item
+                            inventory[0] = item;
                             break;
                         case "2":
                             Console.WriteLine($"Dropping {inventory[1]}");
-                            //swap item
+                            inventory[1] = item;
                             break;
                         case "3":
                             Console.WriteLine($"Dropping {inventory[2]}");
-                            //swap item
+                            inventory[2] = item;
                             break;
                         case "nothing":
                             Console.WriteLine($"Keeping the same inventory");
