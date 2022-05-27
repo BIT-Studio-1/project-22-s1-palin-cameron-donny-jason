@@ -177,12 +177,26 @@ Try to use basic one or two word commands.");
         {
             _ = Console.ReadKey();
         }
+
+
+        public static void props()
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                
+                Console.WriteLine($"itm{i}: {inventory[i]}");
+                
+            }
+         }
+
         public static void NameWelcome()
         {
             Console.WriteLine("Welcome To The Game");
             Console.Write("Please Enter Your Player Name?: ");
             name = Console.ReadLine();   
                         
+
         }
     }
+
 }
