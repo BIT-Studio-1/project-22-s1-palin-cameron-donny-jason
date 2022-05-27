@@ -144,5 +144,16 @@ namespace Group_Project
         {
             _ = Console.ReadKey();
         }
+
+        public static void props()
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                
+                Console.WriteLine($"itm{i}: {inventory[i]}");
+                
+            }
+        }
     }
+
 }
