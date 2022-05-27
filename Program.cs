@@ -1,11 +1,16 @@
 ﻿using System;
+using System.IO;
 
 namespace Group_Project
 {
     internal class Program
     {
         public static string[] inventory = { " ", " ", " " };
+
         public static string name;
+
+        public static bool[] roomstatus = new bool[10];
+
 
         static void Main(string[] args)
         {
@@ -33,12 +38,13 @@ ________________________________________________________________________________
         }
         public static void RoomA()
         {
-            bool fail, keyTaken = false;
+            bool fail;
             string temp;
+            int room = 1;
             do
             {
                 Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
-                if (keyTaken == false)
+                if (roomstatus[room] == false)
                 {
                     Console.WriteLine("There is also a key on the floor");
                 }
@@ -48,10 +54,10 @@ ________________________________________________________________________________
                 {
                     case "key":
                     case "pick up":
-                        if (keyTaken == false)
+                        if (roomstatus[room] == false)
                         {
                             PickUp("Key");
-                            keyTaken = true;
+                            roomstatus[room] = true;
                         }
                         else
                         {
