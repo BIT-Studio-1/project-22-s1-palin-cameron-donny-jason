@@ -62,6 +62,10 @@ ________________________________________________________________________________
                         }
                         fail = true;
                         break;
+                    case "inventory":
+                        props();
+                        fail=true;
+                        break;
                     case "left":
                     case "west":
                     case "door":
