@@ -156,8 +156,11 @@ ________________________________________________________________________________
                             break;
                     }
                 } while (again == true);
-
+                
             }
+            Console.WriteLine("Hit any key to continue");
+            Pause();
+            Console.Clear();
         }
         public static void Help()
         {
@@ -185,7 +188,10 @@ Try to use basic one or two word commands.");
             {
                 Console.WriteLine($"Item {i}: {inventory[i]}");
             }
-         }
+            Console.WriteLine("Hit any key to continue");
+            Pause();
+            Console.Clear();
+        }
 
         public static void NameWelcome()
         {
