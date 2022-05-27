@@ -134,11 +134,17 @@ namespace Group_Project
         }
         public static void Help()
         {
-            Console.WriteLine("You are in the help area");
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine(@"
+            Welcome to the help screen!
+
+This program looks for simple keywords such as:
+'Left', 'Right', 'Key', 'West', 'East', 'Door', 'Passage'.
+If you are having issues with inputting commands you are probably
+trying to do more complex things than the game is capable of.
+Try to use basic one or two word commands.");
+            Console.WriteLine("\nPress any key to continue");
             Pause();
             Console.Clear();
-            //Have some general guidance for what stuff the program is looking for
         }
         public static void Pause() //Because I'm lazy and Pause(); is faster to type and doesn't cause issues if I use it multiple times.
         {
