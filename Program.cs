@@ -5,6 +5,7 @@ namespace Group_Project
     internal class Program
     {
         public static string[] inventory = { " ", " ", " " };
+        public static string name;
 
         static void Main(string[] args)
         {
@@ -15,8 +16,15 @@ namespace Group_Project
         public static void Intro()
         {
             Console.WriteLine(@"
+                
+                ████████╗██╗  ██╗██╗███████╗    ██╗███████╗    ██╗███╗   ██╗████████╗██████╗  ██████╗ 
+                ╚══██╔══╝██║  ██║██║██╔════╝    ██║██╔════╝    ██║████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗
+                   ██║   ███████║██║███████╗    ██║███████╗    ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║
+                   ██║   ██╔══██║██║╚════██║    ██║╚════██║    ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║
+                   ██║   ██║  ██║██║███████║    ██║███████║    ██║██║ ╚████║   ██║   ██║  ██║╚██████╔╝
+                   ╚═╝   ╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝╚══════╝    ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ 
 
-
+________________________________________________________________________________________________________________________
 
 
 ");
@@ -111,8 +119,14 @@ namespace Group_Project
                 bool again = false;
                 do
                 {
-                    Console.WriteLine("Would you like to drop slot 1, slot 2, slot 3, or nothing: ");
+                    Console.WriteLine("What would you like to do? ");
+                    Console.WriteLine("[1] Drop Item1:");
+                    Console.WriteLine("[2] Drop Item1:");
+                    Console.WriteLine("[3] Drop Item1:");
+                    Console.WriteLine("[4] Don't Pick Up Item");
+
                     string drop = Console.ReadLine().ToLower();
+
                     switch (drop)
                     {
                         case "1":
@@ -156,6 +170,13 @@ Try to use basic one or two word commands.");
         public static void Pause() //Because I'm lazy and Pause(); is faster to type and doesn't cause issues if I use it multiple times.
         {
             _ = Console.ReadKey();
+        }
+        public static void NameWelcome()
+        {
+            Console.WriteLine("Welcome To The Game");
+            Console.WriteLine("Please Enter Your Player Name?: ");
+            name = Console.ReadLine();   
+                        
         }
     }
 }
