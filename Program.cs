@@ -6,11 +6,8 @@ namespace Group_Project
     internal class Program
     {
         public static string[] inventory = { " ", " ", " " };
-
         public static string name;
-
         public static bool[] roomstatus = new bool[10];
-
 
         static void Main(string[] args)
         {
@@ -130,7 +127,6 @@ ________________________________________________________________________________
                     Console.WriteLine("[2] Drop Item1:");
                     Console.WriteLine("[3] Drop Item1:");
                     Console.WriteLine("[4] Don't Pick Up Item");
-
                     string drop = Console.ReadLine().ToLower();
 
                     switch (drop)
@@ -183,9 +179,7 @@ Try to use basic one or two word commands.");
         {
             for (int i = 0; i < inventory.Length; i++)
             {
-                
-                Console.WriteLine($"itm{i}: {inventory[i]}");
-                
+                Console.WriteLine($"Item {i}: {inventory[i]}");
             }
          }
 
