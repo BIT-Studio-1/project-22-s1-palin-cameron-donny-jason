@@ -1,10 +1,16 @@
 ﻿using System;
+using System.IO;
 
 namespace Group_Project
 {
     internal class Program
     {
         public static string[] inventory = { " ", " ", " " };
+
+        public static string name;
+
+        public static bool[] roomstatus = new bool[10];
+
 
         static void Main(string[] args)
         {
@@ -14,16 +20,31 @@ namespace Group_Project
         }
         public static void Intro()
         {
+            Console.WriteLine(@"
+                
+                ████████╗██╗  ██╗██╗███████╗    ██╗███████╗    ██╗███╗   ██╗████████╗██████╗  ██████╗ 
+                ╚══██╔══╝██║  ██║██║██╔════╝    ██║██╔════╝    ██║████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗
+                   ██║   ███████║██║███████╗    ██║███████╗    ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║
+                   ██║   ██╔══██║██║╚════██║    ██║╚════██║    ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║
+                   ██║   ██║  ██║██║███████║    ██║███████║    ██║██║ ╚████║   ██║   ██║  ██║╚██████╔╝
+                   ╚═╝   ╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝╚══════╝    ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ 
+
+________________________________________________________________________________________________________________________
+
+
+");
+              
             //Put an intro here!
         }
         public static void RoomA()
         {
-            bool fail, keyTaken = false;
+            bool fail;
             string temp;
+            int room = 1;
             do
             {
                 Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
-                if (keyTaken == false)
+                if (roomstatus[room] == false)
                 {
                     Console.WriteLine("There is also a key on the floor");
                 }
@@ -33,10 +54,10 @@ namespace Group_Project
                 {
                     case "key":
                     case "pick up":
-                        if (keyTaken == false)
+                        if (roomstatus[room] == false)
                         {
                             PickUp("Key");
-                            keyTaken = true;
+                            roomstatus[room] = true;
                         }
                         else
                         {
@@ -104,21 +125,27 @@ namespace Group_Project
                 bool again = false;
                 do
                 {
-                    Console.WriteLine("Would you like to drop slot 1, slot 2, slot 3, or nothing: ");
+                    Console.WriteLine("What would you like to do? ");
+                    Console.WriteLine("[1] Drop Item1:");
+                    Console.WriteLine("[2] Drop Item1:");
+                    Console.WriteLine("[3] Drop Item1:");
+                    Console.WriteLine("[4] Don't Pick Up Item");
+
                     string drop = Console.ReadLine().ToLower();
+
                     switch (drop)
                     {
                         case "1":
                             Console.WriteLine($"Dropping {inventory[0]}");
-                            //swap item
+                            inventory[0] = item;
                             break;
                         case "2":
                             Console.WriteLine($"Dropping {inventory[1]}");
-                            //swap item
+                            inventory[1] = item;
                             break;
                         case "3":
                             Console.WriteLine($"Dropping {inventory[2]}");
-                            //swap item
+                            inventory[2] = item;
                             break;
                         case "nothing":
                             Console.WriteLine($"Keeping the same inventory");
@@ -134,16 +161,23 @@ namespace Group_Project
         }
         public static void Help()
         {
-            Console.WriteLine("You are in the help area");
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine(@"
+            Welcome to the help screen!
+
+This program looks for simple keywords such as:
+'Left', 'Right', 'Key', 'West', 'East', 'Door', 'Passage'.
+If you are having issues with inputting commands you are probably
+trying to do more complex things than the game is capable of.
+Try to use basic one or two word commands.");
+            Console.WriteLine("\nPress any key to continue");
             Pause();
             Console.Clear();
-            //Have some general guidance for what stuff the program is looking for
         }
         public static void Pause() //Because I'm lazy and Pause(); is faster to type and doesn't cause issues if I use it multiple times.
         {
             _ = Console.ReadKey();
         }
+
 
         public static void props()
         {
@@ -153,6 +187,15 @@ namespace Group_Project
                 Console.WriteLine($"itm{i}: {inventory[i]}");
                 
             }
+         }
+
+        public static void NameWelcome()
+        {
+            Console.WriteLine("Welcome To The Game");
+            Console.WriteLine("Please Enter Your Player Name?: ");
+            name = Console.ReadLine();   
+                        
+
         }
     }
 
