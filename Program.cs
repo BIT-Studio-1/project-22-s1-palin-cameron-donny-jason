@@ -14,7 +14,7 @@ namespace Group_Project
 
         static void Main(string[] args)
         {
-          
+            NameWelcome();
             Intro();
             RoomA();
         }
@@ -180,7 +180,7 @@ Try to use basic one or two word commands.");
         public static void NameWelcome()
         {
             Console.WriteLine("Welcome To The Game");
-            Console.WriteLine("Please Enter Your Player Name?: ");
+            Console.Write("Please Enter Your Player Name?: ");
             name = Console.ReadLine();   
                         
         }
