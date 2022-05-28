@@ -31,17 +31,17 @@ ________________________________________________________________________________
 
 ");
               
-            //Put an intro here!
+            //Update intro when story is decided
         }
         public static void RoomA()
         {
             bool fail;
             string temp;
-            int room = 1;
+            int key = 1;
             do
             {
                 Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
-                if (roomstatus[room] == false)
+                if (roomstatus[key] == false)
                 {
                     Console.WriteLine("There is also a key on the floor");
                 }
@@ -51,10 +51,11 @@ ________________________________________________________________________________
                 {
                     case "key":
                     case "pick up":
-                        if (roomstatus[room] == false)
+                    case "pick up key":
+                        if (roomstatus[key] == false)
                         {
                             PickUp("Key");
-                            roomstatus[room] = true;
+                            roomstatus[key] = true;
                         }
                         else
                         {
@@ -63,7 +64,8 @@ ________________________________________________________________________________
                         fail = true;
                         break;
                     case "inventory":
-                        props();
+                    case "inv":
+                        Props();
                         fail=true;
                         break;
                     case "left":
@@ -127,9 +129,9 @@ ________________________________________________________________________________
                 do
                 {
                     Console.WriteLine("What would you like to do? ");
-                    Console.WriteLine("[1] Drop Item1:");
-                    Console.WriteLine("[2] Drop Item1:");
-                    Console.WriteLine("[3] Drop Item1:");
+                    Console.WriteLine("[1] Drop Item 1");
+                    Console.WriteLine("[2] Drop Item 1");
+                    Console.WriteLine("[3] Drop Item 1");
                     Console.WriteLine("[4] Don't Pick Up Item");
                     string drop = Console.ReadLine().ToLower();
 
@@ -162,6 +164,7 @@ ________________________________________________________________________________
             Pause();
             Console.Clear();
         }
+
         public static void Help()
         {
             Console.WriteLine(@"
@@ -176,13 +179,13 @@ Try to use basic one or two word commands.");
             Pause();
             Console.Clear();
         }
+
         public static void Pause() //Because I'm lazy and Pause(); is faster to type and doesn't cause issues if I use it multiple times.
         {
             _ = Console.ReadKey();
         }
 
-
-        public static void props()
+        public static void Props()
         {
             for (int i = 0; i < inventory.Length; i++)
             {
@@ -197,9 +200,7 @@ Try to use basic one or two word commands.");
         {
             Console.WriteLine("Welcome To The Game");
             Console.Write("Please Enter Your Player Name?: ");
-            name = Console.ReadLine();   
-                        
-
+            name = Console.ReadLine();
         }
     }
 
