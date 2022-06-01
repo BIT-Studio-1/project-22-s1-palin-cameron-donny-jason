@@ -22,48 +22,9 @@ namespace Group_Project
         {
             Console.WriteLine(@"
                                                                                                                                                                                         
-                              (`  ).                   _           
-                             (     ).              .:(`  )`.       
-                )           _(       '`.          :(   .    )      
-                        .=(`(      .   )     .--  `.  (    ) )      
-                       ((    (..__.:'-'   .+(   )   ` _`  ) )                 
-                `.     `(       ) )       (   .  )     (   )  ._   
-                  )      ` __.:'   )     (   (   ))     `-'.-(`  ) 
-                )  )  ( )       --'       `- __.'         :(      )) 
-                .-'  (_.'          .')                    `(    )  ))
-                                  (_  )                     ` __.:'          
-                                        
-                --..,___.--,--'`,---..-.--+--.,,-,,..._.--..-._.-a:f--.      ___                            
-                                                                     ___..--'  .`.    
-                                                            ___...--'     -  .` `.`.
-                                                   ___...--' _      -  _   .` -   `.`.
-                                          ___...--'  -       _   -       .`  `. - _ `.`.                        
-                                   __..--'_______________ -         _  .`  _   `.   - `.`.
-                                .`    _ /\    -        .`      _     .`__________`. _  -`.`.
-                              .` -   _ /  \_     -   .`  _         .` |Medical    |`.   - `.`.
-                            .`-    _  /   /\   -   .`        _   .`   |___________|  `. _   `.`.                   
-                          .`________ /__ /_ \____.`____________.`     ___       ___  - `._____`|                                                            
-                            |   -  __  -|    | - |  ____  |   | | _  |   |  _  |   |  _ |                        
-                            | _   |  |  | -  |   | |.--.| |___| |    |___|     |___|    |                          
-                            |     |--|  |    | _ | |'--'| |---| |   _|---|     |---|_   |                          
-                            |   - |__| _|  - |   | |.--.| |   | |    |   |_  _ |   |    |
-                         ---``--._      |    |   |=|'--'|=|___|=|====|___|=====|___|====|                           
-                         -- . ''  ``--._| _  |  -|_|.--.|_______|_______________________|                   
-                        `--._           '--- |_  |:|'--'|:::::::|:::::::::::::::::::::::|                                           
-                        _____`--._ ''      . '---'``--._|:::::::|:::::::::::::::::::::::|                     
-                        ----------`--._          ''      ``--.._|:::::::::::::::::::::::|                     
-                        `--._ _________`--._'        --     .   ''-----..............LGB'                                                     
-                             `--._----------`--._.  _           -- . :''           -    ''
-                                  `--._ _________`--._ :'              -- . :''      -- . ''                                        
-                         -- . ''       `--._ ---------`--._   -- . :''
-                                  :'        `--._ _________`--._:'  -- . ''      -- . ''
-                          -- . ''     -- . ''    `--._----------`--._      -- . ''     -- . ''
-                                                      `--._ _________`--._
-                         -- . ''           :'              `--._ ---------`--._-- . ''    -- . ''
-                                  -- . ''       -- . ''         `--._ _________`--._   -- . ''
-                        :'                 -- . ''          -- . ''  `--._----------`--._
+                 
                                                                                                                                 
-__________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________________________
 
 
 
@@ -81,7 +42,15 @@ ________________________________________________________________________________
             int key = 1;
             do
             {
-                Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
+                Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
+                Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up");
+                Console.WriteLine("the front door begins to creak open");
+                Console.WriteLine();
+                Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to this office");
+                Console.WriteLine("to your left you see a door leading to who knows what, and one behind you");
+                Console.Write("Quick where do you want to go:? ");
+                temp = Console.ReadLine();
+                    
                 if (roomstatus[key] == false)
                 {
                     Console.WriteLine("There is also a key on the floor");
