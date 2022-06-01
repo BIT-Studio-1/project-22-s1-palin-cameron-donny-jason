@@ -5,7 +5,18 @@ namespace Group_Project
 {
     internal class Program
     {
+        public struct Item
+        {
+            public string item;
+            public string location;
+            public Item(string itm, string loc)
+            {
+                item = itm;
+                location = loc;
+            }
+        }
         public static string[] inventory = { " ", " ", " " };
+        public static Item[] items = {new Item("small key", "Room 1"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5")}
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
@@ -77,30 +88,32 @@ ________________________________________________________________________________
         public static void RoomA()
         {
             bool fail;
-            string temp;
-            int key = 1;
+            string temp, room = "Room 1";
+            string[] itemInRoom = new string[0];
+            int tempInt;
             do
             {
                 Console.WriteLine("You are standing in a themed place. You are facing north. \nThere is a door to your left and a passage to your right. Where do you go?");
-                if (roomstatus[key] == false)
-                {
-                    Console.WriteLine("There is also a key on the floor");
-                }
+                Items(room, ref itemInRoom);
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
                 {
-                    case "key":
                     case "pick up":
-                    case "pick up key":
-                        if (roomstatus[key] == false)
+                    case "item":
+                        if (itemInRoom.Length == 0)
                         {
-                            PickUp("Key");
-                            roomstatus[key] = true;
+                            Console.WriteLine("There are no items in the room");
+                        } else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
                         }
                         else
                         {
-                            Console.WriteLine("You have already picked up the key");
+                            Console.WriteLine("What item do you want to pick up?");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt], room);
                         }
                         fail = true;
                         break;
@@ -146,7 +159,7 @@ ________________________________________________________________________________
             Pause();
             //This is just here to ensure that you have made it to room c. Fill out later
         }
-        public static void PickUp(string item)
+        public static void PickUp(string item, string room)
         {
             bool full = true, added = false;
             for (int i = 0; i < inventory.Length; i++)
@@ -154,6 +167,7 @@ ________________________________________________________________________________
                 if ((inventory[i] == " ") && (added != true))
                 {
                     inventory[i] = item;
+                    MovingItem(item, "Inventory");
                     added = true;
                     full = false;
                     Console.WriteLine($"{item} added to inventory.");
@@ -180,14 +194,18 @@ ________________________________________________________________________________
                     {
                         case "1":
                             Console.WriteLine($"Dropping {inventory[0]}");
+                            MovingItem(inventory[0], room);
                             inventory[0] = item;
                             break;
                         case "2":
                             Console.WriteLine($"Dropping {inventory[1]}");
+                            MovingItem(inventory[1], room);
                             inventory[1] = item;
                             break;
                         case "3":
                             Console.WriteLine($"Dropping {inventory[2]}");
+                            MovingItem(inventory[2], room);
+                            MovingItem(item, "Inventory");
                             inventory[2] = item;
                             break;
                         case "nothing":
@@ -205,6 +223,35 @@ ________________________________________________________________________________
             Pause();
             Console.Clear();
         }
+        public static void MovingItem(string item, string room)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i].item == item)
+                {
+                    items[i].location = room;
+                }
+            }
+        }
+        public static void ItemsList(string[] itemInRoom)
+        {
+            for (int i = 0;i < itemInRoom.Length; i++)
+            {
+                Console.WriteLine($"Item {i+1}: {itemInRoom[i]}");
+            }
+        }
+        public static void Items(string room, ref string[] ItemInRoom)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i].location == room)
+                {
+                    Console.WriteLine($"Item : A {items[i].item} is on the floor");
+                    Array.Resize(ref ItemInRoom, items.Length + 1);
+                    ItemInRoom[items.Length - 1] = items[i].item;
+                }
+            }
+        }
 
         public static void Help()
         {
@@ -215,7 +262,8 @@ This program looks for simple keywords such as:
 'Left', 'Right', 'Key', 'West', 'East', 'Door', 'Passage'.
 If you are having issues with inputting commands you are probably
 trying to do more complex things than the game is capable of.
-Try to use basic one or two word commands.");
+Try to use basic one or two word commands.
+To pick up items you must use 'Pick Up' rather than the item name.");
             Console.WriteLine("\nPress any key to continue");
             Pause();
             Console.Clear();
@@ -320,6 +368,22 @@ Try to use basic one or two word commands.");
             Console.Write("Please Enter Your Player Name: ");
             name = Console.ReadLine();
             Console.Clear();
+        }
+        public static int EnterInt(string desc) //Inputting, checking, and converting ints. You have to customize the input when calling.
+        {
+            bool isNumber;
+            int tempint;
+            do
+            {
+                Console.Write($"{desc}: ");
+                string temp = Console.ReadLine();
+                isNumber = int.TryParse(temp, out tempint); //Testing if the string is an int
+                if (isNumber == false)
+                {
+                    Console.WriteLine("Invalid input. Please input whole numbers only"); //Error message if it isn't
+                }
+            } while (isNumber == false);
+            return tempint;
         }
     }
 
