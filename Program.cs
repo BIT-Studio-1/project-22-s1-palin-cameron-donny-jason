@@ -16,7 +16,7 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = {new Item("small key", "Room 1"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5")}
+        public static Item[] items = { new Item("small key", "Room 1"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
