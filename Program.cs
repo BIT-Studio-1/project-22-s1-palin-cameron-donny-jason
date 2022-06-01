@@ -11,6 +11,9 @@ namespace Group_Project
 
         static void Main(string[] args)
         {
+            Console.SetWindowSize(140, 40);
+
+
             NameWelcome();
             Intro();
             RoomA();
