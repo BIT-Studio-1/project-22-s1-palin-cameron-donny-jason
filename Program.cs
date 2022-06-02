@@ -16,18 +16,16 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("small key", "Room 1"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
+        public static Item[] items = { new Item("small key", "Office"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
         static void Main(string[] args)
         {
             Console.SetWindowSize(140, 40);
-
-
             NameWelcome();
             Intro();
-            RoomA();
+            Office();
         }
         public static void Intro()
         {
@@ -46,22 +44,22 @@ ________________________________________________________________________________
               
             //Update intro when story is decided
         }
-        public static void RoomA()
+        public static void Office()
         {
             bool fail;
-            string temp, room = "Room 1";
+            string temp, room = "Office", items;
             string[] itemInRoom = new string[0];
             int tempInt;
+            items = Items(room, ref itemInRoom);
             do
             {
                 Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
-                Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up");
+                Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up\n");
                 Console.WriteLine("the front door begins to creak open");
-                Console.WriteLine();
                 Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to the front door.");
-                Console.WriteLine("to your left you see a door leading to who knows what, and one behind you");
-                Items(room, ref itemInRoom);
-                Console.Write("Quick where do you want to go:? ");
+                Console.WriteLine("to your left you see a door leading to who knows what, and one behind you\n");
+                Console.WriteLine(items);
+                Console.Write("\nQuick where do you want to go:? ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
@@ -74,6 +72,7 @@ ________________________________________________________________________________
                         } else if (itemInRoom.Length == 1)
                         {
                             PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         else
                         {
@@ -81,6 +80,7 @@ ________________________________________________________________________________
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
                             PickUp(itemInRoom[tempInt], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         fail = true;
                         break;
@@ -107,7 +107,8 @@ ________________________________________________________________________________
                         fail = true;            //Making sure it loops again
                         break;
                     default:
-                        Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
+                        Console.Clear();
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
                         break;
                 }
@@ -115,15 +116,121 @@ ________________________________________________________________________________
         }
         public static void RoomB()
         {
-            Console.WriteLine("You are in room B");
-            Pause();
-            //This is just here to ensure that you have made it to room b. Fill out later
+            bool fail;
+            string temp, room = "Room 3"; //Rename. Remember to rename the array with items
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            do
+            {
+                Console.WriteLine(""); //Add description
+                Items(room, ref itemInRoom);
+                Console.Write("Where do you want to go: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up?");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt], room);
+                        }
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "left":
+                    case "go left"://Change to the cases you want
+                        //Pick a room to go to
+                        break;
+                    case "behind":
+                    case "back"://Change to the cases you want
+                        //Pick a room to go to
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    default:
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
         }
         public static void RoomC()
         {
-            Console.WriteLine("You are in room C");
-            Pause();
-            //This is just here to ensure that you have made it to room c. Fill out later
+            bool fail;
+            string temp, room = "Room 2"; //Rename. Remember to rename the array with items
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            do
+            {
+                Console.WriteLine(""); //Add description
+                Items(room, ref itemInRoom);
+                Console.Write("Where do you want to go: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up?");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt], room);
+                        }
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "left":
+                    case "go left"://Listing cases. Can change depending on the theme.
+                        RoomB();            //Go to room B
+                        break;
+                    case "behind":
+                    case "back"://Ditto
+                        RoomC();
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    default:
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
         }
         public static void PickUp(string item, string room)
         {
@@ -206,17 +313,25 @@ ________________________________________________________________________________
                 Console.WriteLine($"Item {i+1}: {itemInRoom[i]}");
             }
         }
-        public static void Items(string room, ref string[] ItemInRoom)
+        public static string Items(string room, ref string[] ItemInRoom)
         {
+            string ret = "";
+            bool empty = true;
             for (int i = 0; i < items.Length; i++)
             {
                 if (items[i].location == room)
                 {
-                    Console.WriteLine($"Item : A {items[i].item} is on the floor");
-                    Array.Resize(ref ItemInRoom, items.Length + 1);
-                    ItemInRoom[items.Length - 1] = items[i].item;
+                    empty = false;
+                    ret += $"There is a {items[i].item} on the floor";
+                    Array.Resize(ref ItemInRoom, ItemInRoom.Length + 1);
+                    ItemInRoom[ItemInRoom.Length - 1] = items[i].item;
                 }
             }
+            if (empty == true)
+            {
+                Array.Resize(ref ItemInRoom, 0);
+            }
+            return ret;
         }
 
         public static void Help()
@@ -256,7 +371,6 @@ To pick up items you must use 'Pick Up' rather than the item name.");
             Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine(@"
-
                            █████████                        
                           ███░░░░░███                        
                          ░███    ░███    
@@ -270,7 +384,6 @@ To pick up items you must use 'Pick Up' rather than the item name.");
             Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine(@"
-
                            █████████      ███████████                █████                     
                           ███░░░░░███    ░░███░░░░░███              ░░███                    
                          ░███    ░███     ░███    ░███  ██████    ███████    
@@ -286,7 +399,6 @@ To pick up items you must use 'Pick Up' rather than the item name.");
             Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine(@"
-
                            █████████      ███████████                █████    ██████████                       
                           ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
                          ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
@@ -303,7 +415,6 @@ To pick up items you must use 'Pick Up' rather than the item name.");
             Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine(@"
-
                            █████████      ███████████                █████    ██████████                       
                           ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
                          ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
@@ -316,8 +427,6 @@ To pick up items you must use 'Pick Up' rather than the item name.");
                                                                                                      ░░██████  
                                                                                                       ░░░░░░    
                         ---------------------------------------------------------------------------------------
-
-
 ");           
 
                           
