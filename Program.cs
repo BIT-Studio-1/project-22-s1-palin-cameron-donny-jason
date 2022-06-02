@@ -58,7 +58,7 @@ ________________________________________________________________________________
                 Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up");
                 Console.WriteLine("the front door begins to creak open");
                 Console.WriteLine();
-                Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to this office");
+                Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to the front door.");
                 Console.WriteLine("to your left you see a door leading to who knows what, and one behind you");
                 Items(room, ref itemInRoom);
                 Console.Write("Quick where do you want to go:? ");
@@ -90,17 +90,16 @@ ________________________________________________________________________________
                         fail=true;
                         break;
                     case "left":
-                    case "west":
-                    case "door":
-                    case "open door":
-                    case "go through door": //Listing cases. Can change depending on the theme.
+                    case "go left"://Listing cases. Can change depending on the theme.
                         RoomB();            //Go to room B
                         break;
-                    case "right":
-                    case "east":
-                    case "passage":
-                    case "go through passage": //Ditto
+                    case "behind":
+                    case "back"://Ditto
                         RoomC();
+                        break;
+                    case "hallway":
+                    case "front door":
+                        Console.WriteLine("You walk straight into the very surprised people opening the front door. You are caught without discovering anything. \nGame Over.");
                         break;
                     case "?":
                     case "help":                //If they ask for help
