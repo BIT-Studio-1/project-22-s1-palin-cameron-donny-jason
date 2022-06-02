@@ -22,7 +22,13 @@ namespace Group_Project
 
         static void Main(string[] args)
         {
+
+            #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
+            #pragma warning restore CA1416 // Validate platform compatibility
+
+            Console.Clear();
+
             NameWelcome();
             Intro();
             Office();
@@ -41,7 +47,7 @@ ________________________________________________________________________________
 
 
 ");
-              
+
             //Update intro when story is decided
         }
         public static void Office()
@@ -53,15 +59,18 @@ ________________________________________________________________________________
             items = Items(room, ref itemInRoom);
             do
             {
+
+                Console.WriteLine();
                 Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
                 Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up\n");
                 Console.WriteLine("the front door begins to creak open");
                 Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to the front door.");
                 Console.WriteLine("to your left you see a door leading to who knows what, and one behind you\n");
                 Console.WriteLine(items);
-                Console.Write("\nQuick where do you want to go:? ");
+                Console.Write($"Quick where do you want to go " + name + ":");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
+
                 switch (temp)
                 {
                     case "pick up":
@@ -87,11 +96,11 @@ ________________________________________________________________________________
                     case "inventory":
                     case "inv":
                         Props();
-                        fail=true;
-                        break;
+                        fail = true;
+                        break;                 
                     case "left":
                     case "go left"://Listing cases. Can change depending on the theme.
-                        RoomB();            //Go to room B
+                        Lounge();            //Go to room B
                         break;
                     case "behind":
                     case "back"://Ditto
@@ -113,8 +122,8 @@ ________________________________________________________________________________
                         break;
                 }
             } while (fail == true);             //Looping again if needed
-        }
-        public static void RoomB()
+        }      
+        public static void Lounge()
         {
             bool fail;
             string temp, room = "Room 3"; //Rename. Remember to rename the array with items
@@ -122,7 +131,8 @@ ________________________________________________________________________________
             int tempInt;
             do
             {
-                Console.WriteLine(""); //Add description
+                Console.WriteLine();
+                Console.WriteLine("You are in a lounge with a long table in the middle, a fruit knife and a lighter on the table, and a wardrobe next to the door."); 
                 Items(room, ref itemInRoom);
                 Console.Write("Where do you want to go: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -153,9 +163,9 @@ ________________________________________________________________________________
                         Props();
                         fail = true;
                         break;
-                    case "left":
-                    case "go left"://Change to the cases you want
-                        //Pick a room to go to
+                    case "office":
+                    case "go office"://Change to the cases you want
+                        Office();
                         break;
                     case "behind":
                     case "back"://Change to the cases you want
@@ -214,7 +224,7 @@ ________________________________________________________________________________
                         break;
                     case "left":
                     case "go left"://Listing cases. Can change depending on the theme.
-                        RoomB();            //Go to room B
+                        Lounge();            //Go to room B
                         break;
                     case "behind":
                     case "back"://Ditto
@@ -368,66 +378,67 @@ To pick up items you must use 'Pick Up' rather than the item name.");
 
         public static void NameWelcome()
         {
-            Thread.Sleep(500);
-            Console.Clear();
-            Console.WriteLine(@"
-                           █████████                        
-                          ███░░░░░███                        
-                         ░███    ░███    
-                         ░███████████   
-                         ░███    ░███    
-                         █████   █████   
-                        ░░░░░   ░░░░░   
+                                                            // commented out for testing !! change towards the end!!
+//            Thread.Sleep(500);
+//            Console.Clear();
+//            Console.WriteLine(@"
+//                           █████████                        
+//                          ███░░░░░███                        
+//                         ░███    ░███    
+//                         ░███████████   
+//                         ░███    ░███    
+//                         █████   █████   
+//                        ░░░░░   ░░░░░   
                                                                                                     
                                                                                                           
-");
-            Thread.Sleep(500);
-            Console.Clear();
-            Console.WriteLine(@"
-                           █████████      ███████████                █████                     
-                          ███░░░░░███    ░░███░░░░░███              ░░███                    
-                         ░███    ░███     ░███    ░███  ██████    ███████    
-                         ░███████████     ░██████████  ░░░░░███  ███░░███    
-                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███    
-                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███    
-                         █████   █████    ███████████ ░░████████░░████████   
-                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░   
+//");
+//            Thread.Sleep(500);
+//            Console.Clear();
+//            Console.WriteLine(@"
+//                           █████████      ███████████                █████                     
+//                          ███░░░░░███    ░░███░░░░░███              ░░███                    
+//                         ░███    ░███     ░███    ░███  ██████    ███████    
+//                         ░███████████     ░██████████  ░░░░░███  ███░░███    
+//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███    
+//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███    
+//                         █████   █████    ███████████ ░░████████░░████████   
+//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░   
                                                                                                     
                                                                                                     
                                                                                                             
-");
-            Thread.Sleep(500);
-            Console.Clear();
-            Console.WriteLine(@"
-                           █████████      ███████████                █████    ██████████                       
-                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
-                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
-                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
-                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
-                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
-                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
-                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
-                                                                                                      ███ ░███ 
-                                                                                                     ░░██████  
-                                                                                                      ░░░░░░          
-");
+//");
+//            Thread.Sleep(500);
+//            Console.Clear();
+//            Console.WriteLine(@"
+//                           █████████      ███████████                █████    ██████████                       
+//                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
+//                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
+//                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
+//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
+//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
+//                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
+//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
+//                                                                                                      ███ ░███ 
+//                                                                                                     ░░██████  
+//                                                                                                      ░░░░░░          
+//");
 
-            Thread.Sleep(500);
-            Console.Clear();
-            Console.WriteLine(@"
-                           █████████      ███████████                █████    ██████████                       
-                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
-                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
-                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
-                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
-                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
-                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
-                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
-                                                                                                      ███ ░███ 
-                                                                                                     ░░██████  
-                                                                                                      ░░░░░░    
-                        ---------------------------------------------------------------------------------------
-");           
+//            Thread.Sleep(500);
+//            Console.Clear();
+//            Console.WriteLine(@"
+//                           █████████      ███████████                █████    ██████████                       
+//                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
+//                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
+//                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
+//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
+//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
+//                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
+//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
+//                                                                                                      ███ ░███ 
+//                                                                                                     ░░██████  
+//                                                                                                      ░░░░░░    
+//                        ---------------------------------------------------------------------------------------
+//");           
 
                           
 
