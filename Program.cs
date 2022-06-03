@@ -340,7 +340,7 @@ This program looks for simple keywords such as:
 If you are having issues with inputting commands you are probably
 trying to do more complex things than the game is capable of.
 Try to use basic one or two word commands.
-To pick up items you must use 'Pick Up' rather than the item name.");
+To pick up items you can use 'Pick up' rather than the item name.");
             Console.WriteLine("\nPress any key to continue");
             Pause();
             Console.Clear();
