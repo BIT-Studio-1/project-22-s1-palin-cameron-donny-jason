@@ -16,7 +16,7 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("small key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("large key", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
@@ -51,7 +51,7 @@ namespace Group_Project
                 Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
                 Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
                 Console.WriteLine(items);
-                Console.Write($"Where do you want to go {name}?");
+                Console.Write($"Where do you want to go {name}? ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
@@ -74,7 +74,7 @@ namespace Group_Project
                             Console.WriteLine("What item do you want to pick up?");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
-                            PickUp(itemInRoom[tempInt], room);
+                            PickUp(itemInRoom[tempInt-1], room);
                             items = Items(room, ref itemInRoom);
                         }
                         fail = true;
@@ -113,14 +113,14 @@ namespace Group_Project
         public static void Lounge()
         {
             bool fail;
-            string temp, room = "Lounge"; //Rename. Remember to rename the array with items
+            string temp, room = "Lounge", items; //Rename. Remember to rename the array with items
             string[] itemInRoom = new string[0];
             int tempInt;
+            items = Items(room, ref itemInRoom);
             do
             {
-                Console.WriteLine();
-                Console.WriteLine("You are in a lounge with a long table in the middle, a fruit knife and a lighter on the table, and a wardrobe next to the door."); 
-                Items(room, ref itemInRoom);
+                Console.WriteLine("You are in a lounge with a long table in the middle and a wardrobe next to the door.");
+                Console.WriteLine(items);
                 Console.Write("Where do you want to go: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
@@ -128,6 +128,10 @@ namespace Group_Project
                 {
                     case "pick up":
                     case "item":
+                    case "grab":
+                    case "take":
+                    case "lighter":
+                    case "knife":
                         if (itemInRoom.Length == 0)
                         {
                             Console.WriteLine("There are no items in the room");
@@ -135,13 +139,15 @@ namespace Group_Project
                         else if (itemInRoom.Length == 1)
                         {
                             PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         else
                         {
                             Console.WriteLine("What item do you want to pick up?");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
-                            PickUp(itemInRoom[tempInt], room);
+                            PickUp(itemInRoom[tempInt-1], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         fail = true;
                         break;
@@ -197,10 +203,10 @@ namespace Group_Project
                         }
                         else
                         {
-                            Console.WriteLine("What item do you want to pick up?");
+                            Console.WriteLine("What number item do you want to pick up?");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
-                            PickUp(itemInRoom[tempInt], room);
+                            PickUp(itemInRoom[tempInt-1], room);
                         }
                         fail = true;
                         break;
@@ -289,8 +295,6 @@ namespace Group_Project
                 } while (again == true);
                 
             }
-            Console.WriteLine("Hit any key to continue");
-            Pause();
             Console.Clear();
         }
         public static void MovingItem(string item, string room)
@@ -314,12 +318,13 @@ namespace Group_Project
         {
             string ret = "";
             bool empty = true;
+            Array.Resize(ref ItemInRoom, 0);
             for (int i = 0; i < items.Length; i++)
             {
                 if (items[i].location == room)
                 {
                     empty = false;
-                    ret += $"There is a {items[i].item} on the floor";
+                    ret += $"There is a {items[i].item} on the floor\n";
                     Array.Resize(ref ItemInRoom, ItemInRoom.Length + 1);
                     ItemInRoom[ItemInRoom.Length - 1] = items[i].item;
                 }
