@@ -35,19 +35,8 @@ namespace Group_Project
         }
         public static void Intro()
         {
-            Console.WriteLine(@"
-                                                                                                                                                                                        
-                 
-                                                                                                                                
-____________________________________________________________________________________________________________________________________________
-
-
-
-
-
-
-");
-
+            Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
+            Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up and the front door begins to creak open\n");
             //Update intro when story is decided
         }
         public static void Office()
@@ -59,22 +48,19 @@ ________________________________________________________________________________
             items = Items(room, ref itemInRoom);
             do
             {
-
-                Console.WriteLine();
-                Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
-                Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up\n");
-                Console.WriteLine("the front door begins to creak open");
-                Console.WriteLine("the only space between you and the men is a staircase and with short hallway leading to the front door.");
-                Console.WriteLine("to your left you see a door leading to who knows what, and one behind you\n");
+                Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
+                Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
                 Console.WriteLine(items);
-                Console.Write($"Quick where do you want to go " + name + ":");
+                Console.Write($"Where do you want to go {name}?");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
-
                 switch (temp)
                 {
                     case "pick up":
                     case "item":
+                    case "grab":
+                    case "take":
+                    case "key":
                         if (itemInRoom.Length == 0)
                         {
                             Console.WriteLine("There are no items in the room");
