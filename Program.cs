@@ -95,6 +95,7 @@ namespace Group_Project
                     case "hallway":
                     case "front door":
                         Console.WriteLine("You walk straight into the very surprised people opening the front door. You are caught without discovering anything. \nGame Over.");
+                        attack();
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -360,6 +361,103 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Console.WriteLine("Hit any key to continue");
             Pause();
             Console.Clear();
+        }
+
+
+        public static void attack()
+        {
+            string answer;
+            int playeratt, playerHP, computeratt, computerHP, computer;
+            playeratt = 5;
+            playerHP = 50;
+            computerHP = 20;
+
+            Random rand = new Random();
+            computer = rand.Next(5);
+
+            switch (computer)
+            {
+                case 0:
+                    Console.WriteLine("computer attack");
+                    break;
+                case 1:
+                    Console.WriteLine("computer attack");
+                    break;
+                case 2:
+                    Console.WriteLine("computer attack");
+                    break;
+                case 3:
+                    Console.WriteLine("computer attack");
+                    break;
+                case 4:
+                    Console.WriteLine("computer defense");
+                    break;
+            }
+
+
+            while ((computerHP > 0) && (playerHP > 0))
+            {
+
+                computeratt = rand.Next(1, 6);
+                Console.WriteLine($"Now, enemy hp is {computerHP:D2}");
+                Console.WriteLine("you want to attack or defense");
+                answer = Console.ReadLine();
+                computer = rand.Next(5);
+                switch (answer)
+                {
+                    case "attack":
+                        if ((computer == 0) || (computer == 1) || (computer == 2) || (computer == 3))
+                        {
+                            playerHP = playerHP - computeratt;
+                            computerHP = computerHP - playeratt;
+                            Console.WriteLine("you choose attack");
+                            Console.WriteLine($"Enemy attack is {computeratt:D2}");
+                            Console.WriteLine($"your hp is {playerHP:D2}");
+                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                        }
+                        else
+                        {
+                            playerHP = playerHP - 0;
+                            computerHP = computerHP - 0;
+                            Console.WriteLine("The enemy resisted the attack");
+                            Console.WriteLine($"your hp is {playerHP:D2}");
+                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                        }
+                        break;
+                    case "defense":
+                        if (computer == 4)
+                        {
+                            playerHP = playerHP - 0;
+                            computerHP = computerHP - 0;
+                            Console.WriteLine("you choose defense");
+                            Console.WriteLine($"Enemy choose defense");
+                            Console.WriteLine($"your hp is {playerHP:D2}");
+                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                        }
+                        else
+                        {
+                            playerHP = playerHP - 0;
+                            computerHP = computerHP - 0;
+                            Console.WriteLine("you choose defense");
+                            Console.WriteLine($"Enemy attack is {computeratt:D2}");
+                            Console.WriteLine($"your hp is {playerHP:D2}");
+                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                        }
+                        break;
+                }
+
+            }
+            if (computerHP == 0)
+            {
+                Console.WriteLine("you win");
+
+            }
+            else if (playerHP == 0)
+            {
+                Console.WriteLine("you lose");
+            }
+            Console.WriteLine($"your hp is {playerHP:D2}");
+            Console.ReadLine();
         }
 
         public static void NameWelcome()
