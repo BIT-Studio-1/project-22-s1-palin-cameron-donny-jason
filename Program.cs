@@ -16,7 +16,7 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("small key", "Office"), new Item("large key", "Room 3"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
+        public static Item[] items = { new Item("small key", "Office"), new Item("large key", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
@@ -112,7 +112,7 @@ namespace Group_Project
         public static void Lounge()
         {
             bool fail;
-            string temp, room = "Room 3"; //Rename. Remember to rename the array with items
+            string temp, room = "Lounge"; //Rename. Remember to rename the array with items
             string[] itemInRoom = new string[0];
             int tempInt;
             do
