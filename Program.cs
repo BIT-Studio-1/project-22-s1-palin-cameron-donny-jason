@@ -41,32 +41,38 @@ namespace Group_Project
         }
         public static void RestartGame()
         {
-            retry:
-            string temp;
-            Console.WriteLine();
-            Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
-            Console.WriteLine("Any How Would You Like To Restart Or Quit Game (r/q): ");
-            Console.WriteLine();
-            temp = Console.ReadLine().ToLower();
-
-            switch (temp)
+            bool fail = false;
+            do
             {
-                case "r":
-                    Console.Clear();
-                    NameWelcome();
-                    Intro();
-                    Office();
-                    break;
-                case "q":                   
-                    Console.WriteLine("Thanks For Playing");                   
-                    break;
-                default:
-                    Console.Clear();
-                    Console.WriteLine("Invalid Input Try Again");
-                    goto retry;                   
-            }
-        }
-   
+                string temp;
+                Console.WriteLine();
+                Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
+                Console.WriteLine("Or You Chose To Quit The Game");
+                Console.WriteLine("Any How Would You Like To Restart Or Quit Game (r/q): "); // gives player options if they die retart or quit game.
+                Console.WriteLine();
+                temp = Console.ReadLine().ToLower();
+
+                switch (temp)
+                {
+                    case "r":
+                        Console.Clear();
+                        NameWelcome();
+                        Intro();
+                        Office();
+                        break;
+                    case "q":
+                        Console.WriteLine("Thanks For Playing");
+                        fail = false;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid Input Try Again");
+                        fail = true;
+                        break;
+                }
+            } while (fail == true);
+
+        }  
         public static void Office()
         {
             bool fail;
@@ -79,7 +85,7 @@ namespace Group_Project
                 Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
                 Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
                 Console.WriteLine(items);
-                Console.Write($"Where do you want to go {name}? ");
+                Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
@@ -99,7 +105,7 @@ namespace Group_Project
                         }
                         else
                         {
-                            Console.WriteLine("What item do you want to pick up?");
+                            Console.WriteLine("What item do you want to pick up: ");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
                             PickUp(itemInRoom[tempInt-1], room);
@@ -122,7 +128,7 @@ namespace Group_Project
                         break;
                     case "hallway":
                     case "front door":
-                        Console.WriteLine("You walk straight into the very surprised group of thuggish looking men opening the front door, You been captured");
+                        Console.WriteLine("You walk straight into the very surprised group of large thuggish looking men opening the front door, You been captured");
                         RestartGame();
                         break;
                     case "?":
@@ -149,7 +155,7 @@ namespace Group_Project
             {
                 Console.WriteLine("You are in a lounge with a long table in the middle and a wardrobe next to the door.");
                 Console.WriteLine(items);
-                Console.Write("Where do you want to go: ");
+                Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
                 switch (temp)
@@ -171,7 +177,7 @@ namespace Group_Project
                         }
                         else
                         {
-                            Console.WriteLine("What item do you want to pick up?");
+                            Console.WriteLine("What item do you want to pick up: ");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
                             PickUp(itemInRoom[tempInt-1], room);
@@ -236,7 +242,7 @@ namespace Group_Project
                         }
                         else
                         {
-                            Console.WriteLine("What number item do you want to pick up?");
+                            Console.WriteLine("What number item do you want to pick up: ");
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
                             PickUp(itemInRoom[tempInt-1], room);
