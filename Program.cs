@@ -16,16 +16,16 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic") };
+        public static Item[] items = { new Item("key", "Office"), new Item("knife", "Lounge"), new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
         static void Main(string[] args)
         {
 
-            #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
+#pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
-            #pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
 
             Console.Clear();
 
@@ -39,6 +39,34 @@ namespace Group_Project
             Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up and the front door begins to creak open\n");
             //Update intro when story is decided
         }
+        public static void RestartGame()
+        {
+            retry:
+            string temp;
+            Console.WriteLine();
+            Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
+            Console.WriteLine("Any How Would You Like To Restart Or Quit Game (r/q): ");
+            Console.WriteLine();
+            temp = Console.ReadLine().ToLower();
+
+            switch (temp)
+            {
+                case "r":
+                    Console.Clear();
+                    NameWelcome();
+                    Intro();
+                    Office();
+                    break;
+                case "q":                   
+                    Console.WriteLine("Thanks For Playing");                   
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Invalid Input Try Again");
+                    goto retry;                   
+            }
+        }
+   
         public static void Office()
         {
             bool fail;
@@ -94,8 +122,8 @@ namespace Group_Project
                         break;
                     case "hallway":
                     case "front door":
-                        Console.WriteLine("You walk straight into the very surprised person opening the front door");
-                        attack();
+                        Console.WriteLine("You walk straight into the very surprised group of thuggish looking men opening the front door, You been captured");
+                        RestartGame();
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -186,7 +214,7 @@ namespace Group_Project
             {
                 Console.WriteLine("Behind the door is a steep set of stairs heading upwards. You climb them and arrive in a low-ceilinged attic.\n" +
                     "There are several empty boxes. The only thing that catches your eye is a crowbar sitting in the corner.\n" +
-                    "The only way our you can see is down the same stairs you just came up");
+                    "The only way out you can see is down the same stairs you just came up");
                 Items(room, ref itemInRoom);
                 Console.Write("Where do you want to go: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
