@@ -16,7 +16,7 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Room 5") };
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic") };
         public static string name;
         public static bool[] roomstatus = new bool[10];
 
@@ -90,7 +90,7 @@ namespace Group_Project
                         break;
                     case "behind":
                     case "back"://Ditto
-                        RoomC();
+                        Attic();
                         break;
                     case "hallway":
                     case "front door":
@@ -176,15 +176,17 @@ namespace Group_Project
                 }
             } while (fail == true);             //Looping again if needed
         }
-        public static void RoomC()
+        public static void Attic()
         {
             bool fail;
-            string temp, room = "Room 2"; //Rename. Remember to rename the array with items
+            string temp, room = "Attic"; //Rename. Remember to rename the array with items
             string[] itemInRoom = new string[0];
             int tempInt;
             do
             {
-                Console.WriteLine(""); //Add description
+                Console.WriteLine("Behind the door is a steep set of stairs heading upwards. You climb them and arrive in a low-ceilinged attic.\n" +
+                    "There are several empty boxes. The only thing that catches your eye is a crowbar sitting in the corner.\n" +
+                    "The only way our you can see is down the same stairs you just came up");
                 Items(room, ref itemInRoom);
                 Console.Write("Where do you want to go: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -193,6 +195,9 @@ namespace Group_Project
                 {
                     case "pick up":
                     case "item":
+                    case "grab":
+                    case "take":
+                    case "crowbar":
                         if (itemInRoom.Length == 0)
                         {
                             Console.WriteLine("There are no items in the room");
@@ -215,13 +220,12 @@ namespace Group_Project
                         Props();
                         fail = true;
                         break;
-                    case "left":
-                    case "go left"://Listing cases. Can change depending on the theme.
-                        Lounge();            //Go to room B
-                        break;
+                    case "office":
+                    case "go office":
                     case "behind":
-                    case "back"://Ditto
-                        RoomC();
+                    case "back":
+                    case "stairs":
+                        Office();
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -324,7 +328,7 @@ namespace Group_Project
                 if (items[i].location == room)
                 {
                     empty = false;
-                    ret += $"There is a {items[i].item} on the floor\n";
+                    ret += $"There is a {items[i].item} in the room\n";
                     Array.Resize(ref ItemInRoom, ItemInRoom.Length + 1);
                     ItemInRoom[ItemInRoom.Length - 1] = items[i].item;
                 }
