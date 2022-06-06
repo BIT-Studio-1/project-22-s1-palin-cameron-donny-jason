@@ -23,9 +23,9 @@ namespace Group_Project
         static void Main(string[] args)
         {
 
-            #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
+#pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
-            #pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
 
             Console.Clear();
 
@@ -39,6 +39,34 @@ namespace Group_Project
             Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up and the front door begins to creak open\n");
             //Update intro when story is decided
         }
+        public static void RestartGame()
+        {
+            retry:
+            string temp;
+            Console.WriteLine();
+            Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
+            Console.WriteLine("Any How Would You Like To Restart Or Quit Game (r/q): ");
+            Console.WriteLine();
+            temp = Console.ReadLine().ToLower();
+
+            switch (temp)
+            {
+                case "r":
+                    Console.Clear();
+                    NameWelcome();
+                    Intro();
+                    Office();
+                    break;
+                case "q":                   
+                    Console.WriteLine("Thanks For Playing");                   
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Invalid Input Try Again");
+                    goto retry;                   
+            }
+        }
+   
         public static void Office()
         {
             bool fail;
@@ -94,8 +122,8 @@ namespace Group_Project
                         break;
                     case "hallway":
                     case "front door":
-                        Console.WriteLine("You walk straight into the very surprised people opening the front door. You are caught without discovering anything. \nGame Over.");
-                        attack();
+                        Console.WriteLine("You walk straight into the very surprised group of thuggish looking men opening the front door, You been captured");
+                        RestartGame();
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -518,8 +546,8 @@ To pick up items you can use 'Pick up' rather than the item name.");
             string answer;
             int playeratt, playerHP, computeratt, computerHP, computer;
             playeratt = 5;
-            playerHP = 50;
-            computerHP = 20;
+            playerHP = 25;
+            computerHP = 25;
 
             Random rand = new Random();
             computer = rand.Next(5);
@@ -549,7 +577,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
 
                 computeratt = rand.Next(1, 6);
                 Console.WriteLine($"Now, enemy hp is {computerHP:D2}");
-                Console.WriteLine("you want to attack or defense");
+                Console.WriteLine("you want to attack: ");
                 answer = Console.ReadLine();
                 computer = rand.Next(5);
                 switch (answer)
@@ -573,13 +601,13 @@ To pick up items you can use 'Pick up' rather than the item name.");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
                         }
                         break;
-                    case "defense":
+                    case "defend":
                         if (computer == 4)
                         {
                             playerHP = playerHP - 0;
                             computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defense");
-                            Console.WriteLine($"Enemy choose defense");
+                            Console.WriteLine("you choose defend");
+                            Console.WriteLine($"Enemy choose defend");
                             Console.WriteLine($"your hp is {playerHP:D2}");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
                         }
@@ -587,7 +615,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
                         {
                             playerHP = playerHP - 0;
                             computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defense");
+                            Console.WriteLine("you choose defend");
                             Console.WriteLine($"Enemy attack is {computeratt:D2}");
                             Console.WriteLine($"your hp is {playerHP:D2}");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
