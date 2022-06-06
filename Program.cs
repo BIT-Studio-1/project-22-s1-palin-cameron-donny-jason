@@ -16,9 +16,9 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("key", "Office"), new Item("knife", "Lounge"), new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic") };
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe")};
         public static string name;
-        public static bool[] roomstatus = new bool[10];
+        public static bool safe = false;
 
         static void Main(string[] args)
         {
@@ -151,9 +151,11 @@ namespace Group_Project
             string[] itemInRoom = new string[0];
             int tempInt;
             items = Items(room, ref itemInRoom);
+            Console.Clear();
             do
             {
-                Console.WriteLine("You are in a lounge with a long table in the middle and a wardrobe next to the door.");
+                Console.WriteLine("You are in a lounge with a long table in the middle and a wardrobe next to the door.\n" +
+                    "There is a door directly in front of you and a hallway to your left as well as the door you just came through");
                 Console.WriteLine(items);
                 Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -191,12 +193,21 @@ namespace Group_Project
                         fail = true;
                         break;
                     case "office":
+                    case "go back":
+                    case "back":
+                    case "behind":
                     case "go office"://Change to the cases you want
                         Office();
                         break;
-                    case "behind":
-                    case "back"://Change to the cases you want
-                        //Pick a room to go to
+                    case "left":
+                    case "go left":
+                    case "hallway"://Change to the cases you want
+                        Study();
+                        break;
+                    case "door":
+                    case "front":
+                    case "forwards":
+                        //Make a room to go to
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -213,15 +224,17 @@ namespace Group_Project
         public static void Attic()
         {
             bool fail;
-            string temp, room = "Attic"; //Rename. Remember to rename the array with items
+            string temp, room = "Attic", items; //Rename. Remember to rename the array with items
             string[] itemInRoom = new string[0];
             int tempInt;
+            items = Items(room, ref itemInRoom);
+            Console.Clear();
             do
             {
                 Console.WriteLine("Behind the door is a steep set of stairs heading upwards. You climb them and arrive in a low-ceilinged attic.\n" +
-                    "There are several empty boxes. The only thing that catches your eye is a crowbar sitting in the corner.\n" +
-                    "The only way out you can see is down the same stairs you just came up");
-                Items(room, ref itemInRoom);
+                    "There are several empty boxes.\n" +
+                    "The only way our you can see is down the same stairs you just came up\n");
+                Console.WriteLine(items);
                 Console.Write("Where do you want to go: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
                 fail = false; //Sets the do while loop to end unless this is changed
@@ -239,6 +252,7 @@ namespace Group_Project
                         else if (itemInRoom.Length == 1)
                         {
                             PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         else
                         {
@@ -246,6 +260,7 @@ namespace Group_Project
                             ItemsList(itemInRoom);
                             tempInt = EnterInt("Input");
                             PickUp(itemInRoom[tempInt-1], room);
+                            items = Items(room, ref itemInRoom);
                         }
                         fail = true;
                         break;
@@ -259,6 +274,7 @@ namespace Group_Project
                     case "behind":
                     case "back":
                     case "stairs":
+                    case "down":
                         Office();
                         break;
                     case "?":
@@ -272,6 +288,131 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+        }
+        public static void Study()
+        {
+            bool fail;
+            string temp, room = "Study", items;
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            items = Items(room, ref itemInRoom);
+            Console.Clear();
+            do
+            {
+                Console.WriteLine("You enter a study with a desk to one side and a small window on the other.");
+                if (safe == false)
+                {
+                    Console.WriteLine("The desk is clean but you notice a panel in the wall behind that looks as if it could store the information you need\n" +
+                        "You don't see any obvious keyholes or ways of opening it. You could look for a hidden switch or button in this room, or you could try to find a less subtle way of opening it");
+                }
+                else
+                {
+                    Console.WriteLine("There is an open space behind the desk that is now empty");
+                }
+                Console.WriteLine("The window is much to small to fit through so the only exit is back the way you came.");
+                Console.WriteLine(items);
+                Console.Write($"Where do you want to go: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                    case "grab":
+                    case "take":
+                    case "key":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up?");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt - 1], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "crowbar":
+                    case "use crowbar":
+                        if (safe == false)
+                        {
+                            for (int i = 0; i < inventory.Length; i++)
+                            {
+                                if (inventory[i] == "Crowbar")
+                                {
+                                    Console.WriteLine("You use the crowbar to pry open the panel and reveal the space behind");
+                                    Pause();
+                                    Safe();
+                                    safe = true;
+                                    Pause();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The safe is already open");
+                            Pause();
+                        }
+                        fail=true;
+                        break;
+                    case "table":
+                        Console.WriteLine("You don't see anything useful on top of the table");
+                        Pause();
+                        fail = true;
+                        break;
+                    case "under table":
+                    case "look under table":
+                    case "look under the table":
+                        if (safe == false)
+                        {
+                            Console.WriteLine("You look under the table and see a button. You press it and the panel slides back revealing the space behind");
+                            Pause();
+                            Safe();
+                            safe = true;
+                            Pause();
+                        }
+                        else
+                        {
+                            Console.WriteLine("The safe is already open");
+                            Pause();
+                        }
+                        fail = true;
+                        break;
+                    case "behind":
+                    case "door":
+                    case "back":
+                        Lounge();
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
+        }
+        public static void Safe()
+        {
+            Console.WriteLine("Inside there is a stack of papers. This must be what you were looking for. You grab it and stuff it in your bag");
+            PickUp("evidence", "Safe");
         }
         public static void PickUp(string item, string room)
         {
@@ -299,8 +440,8 @@ namespace Group_Project
                 {
                     Console.WriteLine("What would you like to do? ");
                     Console.WriteLine("[1] Drop Item 1");
-                    Console.WriteLine("[2] Drop Item 1");
-                    Console.WriteLine("[3] Drop Item 1");
+                    Console.WriteLine("[2] Drop Item 2");
+                    Console.WriteLine("[3] Drop Item 3");
                     Console.WriteLine("[4] Don't Pick Up Item");
                     string drop = Console.ReadLine().ToLower();
 
@@ -333,7 +474,6 @@ namespace Group_Project
                 } while (again == true);
                 
             }
-            Console.Clear();
         }
         public static void MovingItem(string item, string room)
         {
