@@ -94,7 +94,7 @@ namespace Group_Project
                         break;
                     case "hallway":
                     case "front door":
-                        Console.WriteLine("You walk straight into the very surprised people opening the front door. You are caught without discovering anything. \nGame Over.");
+                        Console.WriteLine("You walk straight into the very surprised person opening the front door");
                         attack();
                         break;
                     case "?":
@@ -374,8 +374,8 @@ To pick up items you can use 'Pick up' rather than the item name.");
             string answer;
             int playeratt, playerHP, computeratt, computerHP, computer;
             playeratt = 5;
-            playerHP = 50;
-            computerHP = 20;
+            playerHP = 25;
+            computerHP = 25;
 
             Random rand = new Random();
             computer = rand.Next(5);
@@ -405,7 +405,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
 
                 computeratt = rand.Next(1, 6);
                 Console.WriteLine($"Now, enemy hp is {computerHP:D2}");
-                Console.WriteLine("you want to attack or defense");
+                Console.WriteLine("you want to attack: ");
                 answer = Console.ReadLine();
                 computer = rand.Next(5);
                 switch (answer)
@@ -429,13 +429,13 @@ To pick up items you can use 'Pick up' rather than the item name.");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
                         }
                         break;
-                    case "defense":
+                    case "defend":
                         if (computer == 4)
                         {
                             playerHP = playerHP - 0;
                             computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defense");
-                            Console.WriteLine($"Enemy choose defense");
+                            Console.WriteLine("you choose defend");
+                            Console.WriteLine($"Enemy choose defend");
                             Console.WriteLine($"your hp is {playerHP:D2}");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
                         }
@@ -443,7 +443,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
                         {
                             playerHP = playerHP - 0;
                             computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defense");
+                            Console.WriteLine("you choose defend");
                             Console.WriteLine($"Enemy attack is {computeratt:D2}");
                             Console.WriteLine($"your hp is {playerHP:D2}");
                             Console.WriteLine($"Enemy hp is {computerHP:D2}");
