@@ -19,28 +19,26 @@ namespace Group_Project
         public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe")};
         public static string name;
         public static bool safe = false;
-
+        public static bool RestartExit = false;
         static void Main(string[] args)
         {
 
-#pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
+            #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
 #pragma warning restore CA1416 // Validate platform compatibility
 
-            Console.Clear();
+           
+            do
+            {
+                NameWelcome();
+                Intro();
+                Office();
 
-            NameWelcome();
-            Intro();
-            Office();
-        }
-        public static void Intro()
-        {
-            Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
-            Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up and the front door begins to creak open\n");
-            //Update intro when story is decided
-        }
-        public static void RestartGame()
-        {
+            }while (RestartExit == false);
+            
+
+
+
             bool fail = false;
             do
             {
@@ -72,7 +70,15 @@ namespace Group_Project
                 }
             } while (fail == true);
 
-        }  
+        }
+        public static void Intro()
+        {
+            Console.WriteLine("You find yourself inside a small office room, having sneaked through a slight open bottom window");
+            Console.WriteLine("you are scanning the room for any signs of a hidden lock safe");
+            Console.WriteLine("you hear loud a vehicle approach and pull up the driveway moments later the front door begins to creak open"); 
+            //Update intro when story is decided
+        }
+    
         public static void Office()
         {
             bool fail;
@@ -129,7 +135,7 @@ namespace Group_Project
                     case "hallway":
                     case "front door":
                         Console.WriteLine("You walk straight into the very surprised group of large thuggish looking men opening the front door, You been captured");
-                        RestartGame();
+                        RestartExit = true;
                         break;
                     case "?":
                     case "help":                //If they ask for help
