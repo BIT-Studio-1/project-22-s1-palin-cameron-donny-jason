@@ -16,7 +16,7 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe")};
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("crowbar", "Attic"), new Item("evidence", "Safe")};
         public static string name;
         public static bool safe = false;
         public static bool death = false;
@@ -212,7 +212,7 @@ namespace Group_Project
                     case "door":
                     case "front":
                     case "forwards":
-                        //Make a room to go to
+                        Laundry();
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -238,7 +238,8 @@ namespace Group_Project
             do
             {
                 Console.WriteLine("You enter a small room at the end of the house with a washing machine and a dryer\n" +
-                    "It has ");
+                    "In front of you is a window that you think you can fit through but have you done everything you wanted to do in the house?\n" +
+                    "The only way out is behind you where you came.");
                 Console.WriteLine(items);
                 Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -249,8 +250,6 @@ namespace Group_Project
                     case "item":
                     case "grab":
                     case "take":
-                    case "lighter":
-                    case "knife":
                         if (itemInRoom.Length == 0)
                         {
                             Console.WriteLine("There are no items in the room");
@@ -275,22 +274,17 @@ namespace Group_Project
                         Props();
                         fail = true;
                         break;
-                    case "office":
+                    case "lounge":
                     case "go back":
                     case "back":
                     case "behind":
-                    case "go office"://Change to the cases you want
-                        Office();
+                    case "go lounge"://Change to the cases you want
+                        Lounge();
                         break;
-                    case "left":
-                    case "go left":
-                    case "hallway"://Change to the cases you want
-                        Study();
-                        break;
-                    case "door":
-                    case "front":
-                    case "forwards":
-                        //Make a room to go to
+                    case "outside":
+                    case "window":
+                    case "front"://Change to the cases you want
+                        Console.WriteLine("You squeeze out of the window and get outside");
                         break;
                     case "?":
                     case "help":                //If they ask for help
