@@ -16,10 +16,10 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
-        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe")};
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
         public static string name;
         public static bool safe = false;
-
+        public static bool staff = true;
         static void Main(string[] args)
         {
 
@@ -84,6 +84,7 @@ namespace Group_Project
             {
                 Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
                 Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
+                Console.WriteLine("To your right you can see a Electricity Distribution Room");
                 Console.WriteLine(items);
                 Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -122,6 +123,10 @@ namespace Group_Project
                     case "go left"://Listing cases. Can change depending on the theme.
                         Lounge();            //Go to room B
                         break;
+                    case "right":
+                    case "go right":
+                        ElectricityDistributionRoom();
+                        break;
                     case "behind":
                     case "back"://Ditto
                         Attic();
@@ -143,7 +148,90 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
-        }      
+        }
+
+        public static void ElectricityDistributionRoom()
+        {
+            
+            bool fail;
+            string temp, room = "Electricity Distribution Room", items;
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            items = Items(room, ref itemInRoom);
+            do
+            {
+                Console.WriteLine("you are in the Electricity Distribution Room. there is a fire extinguisher and a flashlight on the wall on the right side of the door.");
+                if(staff == true)
+                {
+                    Console.WriteLine("There is a staff member working with his back to you .");
+                }
+                
+                Console.WriteLine(items);
+                Console.Write($"Where do you want to go {name}: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                    case "grab":
+                    case "fire extinguisher":
+                    case "flashlight":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up: ");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt - 1], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        if(staff == true)
+                        {
+                            Console.WriteLine("The sound of you taking something makes the staff turn around, the found out you didn't belong in this office");
+                            Console.WriteLine("The staff came to you with a wrench. You can only choose to fight.");
+                            attack();
+                            staff = false;
+                        }
+                        
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "office":
+                    case "go office":
+                    case "behind":
+                    case "back":
+                    case "stairs":
+                    case "down":
+                        Office();
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
+        }
+
         public static void Lounge()
         {
             bool fail;
@@ -583,7 +671,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
 
                 computeratt = rand.Next(1, 6);
                 Console.WriteLine($"Now, enemy hp is {computerHP:D2}");
-                Console.WriteLine("you want to attack: ");
+                Console.WriteLine("you want to attack or defend: ");
                 answer = Console.ReadLine();
                 computer = rand.Next(5);
                 switch (answer)
