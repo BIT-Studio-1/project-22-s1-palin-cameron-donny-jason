@@ -16,63 +16,70 @@ namespace Group_Project
             }
         }
         public static string[] inventory = { " ", " ", " " };
+
         public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
         public static string name;
         public static bool safe = false;
         public static bool staff = true;
+        public static bool death = false;
+
         static void Main(string[] args)
         {
 
-#pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
+            #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
 #pragma warning restore CA1416 // Validate platform compatibility
+            string answer;
+            bool repeat;
+            do
+            {
+                repeat = false;
+                NameWelcome();
+                Intro();
+                Office();
+                if (death == true)
+                {
+                    Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
+                }
+                else if (safe == false)
+                {
+                    Console.WriteLine("Ah! You quickly realize you forgot to grab the lock safe contents"); 
+                }
+                else
+                {                 
+                    Console.WriteLine("As you dig inside the envelope to pull the evidence out a hand full of $500 notes appear");
+                    Console.WriteLine("you run off into the sunset laughing to yourself, I'm gonna celebrate by getting rotten drunk");
+                }
+                do
+                {
+                    Console.Write("Would you like to replay from the start (y/n): ");
+                    answer = Console.ReadLine().ToLower();
+                    if (answer == "y")
+                    {
+                        repeat = true;
+                    }
+                    else if (answer != "n")
+                    {
+                        Console.WriteLine("Invalid Input!");
+                        Pause();
+                        Console.Clear();
+                    }
+                                       
+                } while (answer != "y" && answer != "n");
 
-            Console.Clear();
+                
 
-            NameWelcome();
-            Intro();
-            Office();
+            } while (repeat == true);
+                   
         }
         public static void Intro()
         {
-            Console.WriteLine("You find yourself inside a small office room, having slid through the slightly open bottom window");
-            Console.WriteLine("as you are scanning the room for any signs of a hidden lock safe you hear a vehicle approach and pull up and the front door begins to creak open\n");
+            Console.WriteLine("You find yourself inside a small office room, having sneaked through a slight open bottom window");
+            Console.WriteLine("you are scanning the room for any signs of a hidden lock safe!!");
+            Console.WriteLine("you hear loud a vehicle approach and pull up the driveway moments later the front door begins to creak open"); 
             //Update intro when story is decided
         }
-        public static void RestartGame()
-        {
-            bool fail = false;
-            do
-            {
-                string temp;
-                Console.WriteLine();
-                Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
-                Console.WriteLine("Or You Chose To Quit The Game");
-                Console.WriteLine("Any How Would You Like To Restart Or Quit Game (r/q): "); // gives player options if they die retart or quit game.
-                Console.WriteLine();
-                temp = Console.ReadLine().ToLower();
-
-                switch (temp)
-                {
-                    case "r":
-                        Console.Clear();
-                        NameWelcome();
-                        Intro();
-                        Office();
-                        break;
-                    case "q":
-                        Console.WriteLine("Thanks For Playing");
-                        fail = false;
-                        break;
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Invalid Input Try Again");
-                        fail = true;
-                        break;
-                }
-            } while (fail == true);
-
-        }  
+    
         public static void Office()
         {
             bool fail;
@@ -134,7 +141,7 @@ namespace Group_Project
                     case "hallway":
                     case "front door":
                         Console.WriteLine("You walk straight into the very surprised group of large thuggish looking men opening the front door, You been captured");
-                        RestartGame();
+                        death = true;
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -295,7 +302,79 @@ namespace Group_Project
                     case "door":
                     case "front":
                     case "forwards":
-                        //Make a room to go to
+                        Laundry();
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    default:
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
+        }
+
+        public static void Laundry()
+        {
+            bool fail;
+            string temp, room = "Laundry", items; //Rename. Remember to rename the array with items
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            items = Items(room, ref itemInRoom);
+            Console.Clear();
+            do
+            {
+                Console.WriteLine("You enter a small room at the end of the house with a washing machine and a dryer\n" +
+                    "In front of you is a window that you think you can fit through but have you done everything you wanted to do in the house?\n" +
+                    "The only way out is behind you where you came.");
+                Console.WriteLine(items);
+                Console.Write($"Where do you want to go {name}: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                    case "grab":
+                    case "take":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up: ");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt - 1], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "lounge":
+                    case "go back":
+                    case "back":
+                    case "behind":
+                    case "go lounge"://Change to the cases you want
+                        Lounge();
+                        break;
+                    case "outside":
+                    case "window":
+                    case "front"://Change to the cases you want
+                        Console.WriteLine("You squeeze out of the window and get outside");
                         break;
                     case "?":
                     case "help":                //If they ask for help
@@ -446,6 +525,10 @@ namespace Group_Project
                                     Safe();
                                     safe = true;
                                     Pause();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You do not have a crowbar");
                                 }
                             }
                         }
