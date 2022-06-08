@@ -221,6 +221,84 @@ namespace Group_Project
                 }
             } while (fail == true);             //Looping again if needed
         }
+
+        public static void Laundry()
+        {
+            bool fail;
+            string temp, room = "Laundry", items; //Rename. Remember to rename the array with items
+            string[] itemInRoom = new string[0];
+            int tempInt;
+            items = Items(room, ref itemInRoom);
+            Console.Clear();
+            do
+            {
+                Console.WriteLine("You enter a small room at the end of the house with a washing machine and a dryer\n" +
+                    "It has ");
+                Console.WriteLine(items);
+                Console.Write($"Where do you want to go {name}: ");
+                temp = Console.ReadLine().ToLower(); //Gets the command
+                fail = false; //Sets the do while loop to end unless this is changed
+                switch (temp)
+                {
+                    case "pick up":
+                    case "item":
+                    case "grab":
+                    case "take":
+                    case "lighter":
+                    case "knife":
+                        if (itemInRoom.Length == 0)
+                        {
+                            Console.WriteLine("There are no items in the room");
+                        }
+                        else if (itemInRoom.Length == 1)
+                        {
+                            PickUp(itemInRoom[0], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        else
+                        {
+                            Console.WriteLine("What item do you want to pick up: ");
+                            ItemsList(itemInRoom);
+                            tempInt = EnterInt("Input");
+                            PickUp(itemInRoom[tempInt - 1], room);
+                            items = Items(room, ref itemInRoom);
+                        }
+                        fail = true;
+                        break;
+                    case "inventory":
+                    case "inv":
+                        Props();
+                        fail = true;
+                        break;
+                    case "office":
+                    case "go back":
+                    case "back":
+                    case "behind":
+                    case "go office"://Change to the cases you want
+                        Office();
+                        break;
+                    case "left":
+                    case "go left":
+                    case "hallway"://Change to the cases you want
+                        Study();
+                        break;
+                    case "door":
+                    case "front":
+                    case "forwards":
+                        //Make a room to go to
+                        break;
+                    case "?":
+                    case "help":                //If they ask for help
+                        Help();                 //Sending them to the help menu
+                        fail = true;            //Making sure it loops again
+                        break;
+                    default:
+                        Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
+                        fail = true;            //Making sure it loops again
+                        break;
+                }
+            } while (fail == true);             //Looping again if needed
+        }
         public static void Attic()
         {
             bool fail;
@@ -358,6 +436,10 @@ namespace Group_Project
                                     Safe();
                                     safe = true;
                                     Pause();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You do not have a crowbar");
                                 }
                             }
                         }
