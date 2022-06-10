@@ -28,7 +28,7 @@ namespace Group_Project
 
             #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
             Console.SetWindowSize(140, 40);
-#pragma warning restore CA1416 // Validate platform compatibility
+            #pragma warning restore CA1416 // Validate platform compatibility
             string answer;
             bool repeat;
             do
@@ -47,8 +47,8 @@ namespace Group_Project
                 }
                 else
                 {                 
-                    Console.WriteLine("As you dig inside the envelope to pull the evidence out a hand full of $500 notes appear");
-                    Console.WriteLine("you run off into the sunset laughing to yourself, I'm gonna celebrate by getting rotten drunk");
+                    Console.WriteLine("As you dig inside the envelope to pull the evidence out a hand full of $100 notes appear");
+                    Console.WriteLine("you run off through the yard to go turn the evidence in");
                 }
                 do
                 {
