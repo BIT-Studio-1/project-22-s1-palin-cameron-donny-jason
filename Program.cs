@@ -164,7 +164,7 @@ namespace Group_Project
             Console.Clear();
             do
             {
-                Console.WriteLine("you are in the Electricity Distribution Room. there is a fire extinguisher and a flashlight on the wall on the right side of the door.");
+                Console.WriteLine("You are in the Electricity Distribution Room. There is a fire extinguisher and a flashlight on the wall on the right side of the door.");
                 if(staff == true)
                 {
                     Console.WriteLine("There is a staff member working with his back to you .");
@@ -624,11 +624,13 @@ namespace Group_Project
                         case "1":
                             Console.WriteLine($"Dropping {inventory[0]}");
                             MovingItem(inventory[0], room);
+                            MovingItem(item, "Inventory");
                             inventory[0] = item;
                             break;
                         case "2":
                             Console.WriteLine($"Dropping {inventory[1]}");
                             MovingItem(inventory[1], room);
+                            MovingItem(item, "Inventory");
                             inventory[1] = item;
                             break;
                         case "3":
