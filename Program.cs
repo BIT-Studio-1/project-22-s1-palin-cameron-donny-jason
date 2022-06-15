@@ -85,8 +85,9 @@ namespace Group_Project
             do
             {
                 Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
-                Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
                 Console.WriteLine("To your right you can see a Electricity Distribution Room");
+                Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
+                
                 Console.WriteLine(items);
                 Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
@@ -160,6 +161,7 @@ namespace Group_Project
             string[] itemInRoom = new string[0];
             int tempInt;
             items = Items(room, ref itemInRoom);
+            Console.Clear();
             do
             {
                 Console.WriteLine("you are in the Electricity Distribution Room. there is a fire extinguisher and a flashlight on the wall on the right side of the door.");
