@@ -17,7 +17,7 @@ namespace Group_Project
         }
         public static string[] inventory = { " ", " ", " " };
 
-        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("doorknob", "Room 4"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
+        public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
         public static string name;
         public static bool safe = false;
         public static bool staff = true;
@@ -517,7 +517,7 @@ namespace Group_Project
                         {
                             for (int i = 0; i < inventory.Length; i++)
                             {
-                                if (inventory[i] == "Crowbar")
+                                if (inventory[i] == "crowbar")
                                 {
                                     Console.WriteLine("You use the crowbar to pry open the panel and reveal the space behind");
                                     Pause();
@@ -525,10 +525,10 @@ namespace Group_Project
                                     safe = true;
                                     Pause();
                                 }
-                                else
-                                {
-                                    Console.WriteLine("You do not have a crowbar");
-                                }
+                            }
+                            if (safe == false)
+                            {
+                                Console.WriteLine("You do not have a crowbar");
                             }
                         }
                         else
@@ -539,6 +539,7 @@ namespace Group_Project
                         fail=true;
                         break;
                     case "table":
+                    case "desk":
                         Console.WriteLine("You don't see anything useful on top of the table");
                         Pause();
                         fail = true;
@@ -546,6 +547,9 @@ namespace Group_Project
                     case "under table":
                     case "look under table":
                     case "look under the table":
+                    case "under desk":
+                    case "look under desk":
+                    case "look under the desk":
                         if (safe == false)
                         {
                             Console.WriteLine("You look under the table and see a button. You press it and the panel slides back revealing the space behind");
@@ -709,7 +713,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
         {
             for (int i = 0; i < inventory.Length; i++)
             {
-                Console.WriteLine($"Item {i}: {inventory[i]}");
+                Console.WriteLine($"Item {i + 1}: {inventory[i]}");
             }
             Console.WriteLine("Hit any key to continue");
             Pause();
