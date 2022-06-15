@@ -39,11 +39,11 @@ namespace Group_Project
                 Office();
                 if (death == true)
                 {
-                    Console.WriteLine("Well Looks Like You Tried Something Risky, And You Died!!!");
+                    Console.WriteLine("Well it looks like you tried something risky and you died!");
                 }
                 else if (safe == false)
                 {
-                    Console.WriteLine("Ah! You quickly realize you forgot to grab the lock safe contents"); 
+                    Console.WriteLine("You have escaped the house but never found the evidence you were searching for.");
                 }
                 else
                 {                 
@@ -60,24 +60,19 @@ namespace Group_Project
                     }
                     else if (answer != "n")
                     {
-                        Console.WriteLine("Invalid Input!");
+                        Console.Write("Invalid Input!");
                         Pause();
                         Console.Clear();
-                    }
-                                       
-                } while (answer != "y" && answer != "n");
-
-                
-
+                    }                                  
+                } while ((answer != "y") && (answer != "n"));
             } while (repeat == true);
                    
         }
         public static void Intro()
         {
-            Console.WriteLine("You find yourself inside a small office room, having sneaked through a slight open bottom window");
-            Console.WriteLine("you are scanning the room for any signs of a hidden lock safe!!");
-            Console.WriteLine("you hear loud a vehicle approach and pull up the driveway moments later the front door begins to creak open"); 
-            //Update intro when story is decided
+            Console.WriteLine("You find yourself inside a small office room, having sneaked through a slightly open bottom window.");
+            Console.WriteLine("You scan the room for any signs of a hidden lock safe that will surely have the evidence you are looking for.");
+            Console.WriteLine("Suddenly you hear loud a vehicle approach and pull up the driveway and moments later you hear voices outside the front door"); 
         }
     
         public static void Office()
@@ -208,8 +203,10 @@ namespace Group_Project
                             attack();
                             staff = false;
                         }
-                        
-                        fail = true;
+                        if (death != true)
+                        {
+                            fail = true;
+                        }
                         break;
                     case "inventory":
                     case "inv":
@@ -582,7 +579,7 @@ namespace Group_Project
         }
         public static void Safe()
         {
-            Console.WriteLine("Inside there is a stack of papers. This must be what you were looking for. You grab it and stuff it in your bag");
+            Console.WriteLine("Inside there is a stack of papers in an envelope. This must be what you were looking for. You grab it and stuff it in your bag");
             PickUp("evidence", "Safe");
         }
         public static void PickUp(string item, string room)
@@ -803,12 +800,13 @@ To pick up items you can use 'Pick up' rather than the item name.");
             }
             if (computerHP == 0)
             {
-                Console.WriteLine("you win");
+                Console.WriteLine("You win");
 
             }
             else if (playerHP == 0)
             {
-                Console.WriteLine("you lose");
+                Console.WriteLine("You have died");
+                death = true;
             }
             Console.WriteLine($"your hp is {playerHP:D2}");
             Console.ReadLine();
@@ -816,78 +814,6 @@ To pick up items you can use 'Pick up' rather than the item name.");
 
         public static void NameWelcome()
         {
-                                                            // commented out for testing !! change towards the end!!
-//            Thread.Sleep(500);
-//            Console.Clear();
-//            Console.WriteLine(@"
-//                           █████████                        
-//                          ███░░░░░███                        
-//                         ░███    ░███    
-//                         ░███████████   
-//                         ░███    ░███    
-//                         █████   █████   
-//                        ░░░░░   ░░░░░   
-                                                                                                    
-                                                                                                          
-//");
-//            Thread.Sleep(500);
-//            Console.Clear();
-//            Console.WriteLine(@"
-//                           █████████      ███████████                █████                     
-//                          ███░░░░░███    ░░███░░░░░███              ░░███                    
-//                         ░███    ░███     ░███    ░███  ██████    ███████    
-//                         ░███████████     ░██████████  ░░░░░███  ███░░███    
-//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███    
-//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███    
-//                         █████   █████    ███████████ ░░████████░░████████   
-//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░   
-                                                                                                    
-                                                                                                    
-                                                                                                            
-//");
-//            Thread.Sleep(500);
-//            Console.Clear();
-//            Console.WriteLine(@"
-//                           █████████      ███████████                █████    ██████████                       
-//                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
-//                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
-//                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
-//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
-//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
-//                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
-//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
-//                                                                                                      ███ ░███ 
-//                                                                                                     ░░██████  
-//                                                                                                      ░░░░░░          
-//");
-
-//            Thread.Sleep(500);
-//            Console.Clear();
-//            Console.WriteLine(@"
-//                           █████████      ███████████                █████    ██████████                       
-//                          ███░░░░░███    ░░███░░░░░███              ░░███    ░░███░░░░███                      
-//                         ░███    ░███     ░███    ░███  ██████    ███████     ░███   ░░███  ██████   █████ ████
-//                         ░███████████     ░██████████  ░░░░░███  ███░░███     ░███    ░███ ░░░░░███ ░░███ ░███ 
-//                         ░███░░░░░███     ░███░░░░░███  ███████ ░███ ░███     ░███    ░███  ███████  ░███ ░███ 
-//                         ░███    ░███     ░███    ░███ ███░░███ ░███ ░███     ░███    ███  ███░░███  ░███ ░███ 
-//                         █████   █████    ███████████ ░░████████░░████████    ██████████  ░░████████ ░░███████ 
-//                        ░░░░░   ░░░░░    ░░░░░░░░░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░░░░░░    ░░░░░░░░   ░░░░░███ 
-//                                                                                                      ███ ░███ 
-//                                                                                                     ░░██████  
-//                                                                                                      ░░░░░░    
-//                        ---------------------------------------------------------------------------------------
-//");           
-
-                          
-
-
-
-
-
-
-
-
-
             Console.WriteLine("Welcome To The Game");
             Console.Write("Please Enter Your Player Name: ");
             name = Console.ReadLine();
