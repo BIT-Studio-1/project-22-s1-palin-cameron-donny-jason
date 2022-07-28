@@ -726,11 +726,11 @@ To pick up items you can use 'Pick up' rather than the item name.");
         public static void attack()
         {
             string answer;
-            int playeratt, playerHP, computeratt, computerHP, computer;
-            playeratt = 5;
-            playerHP = 25;
-            computerHP = 25;
-
+            int playeratt = 5;
+            int playerHP = 25;
+            int computeratt;
+            int computerHP = 25;
+            int computer;
             Random rand = new Random();
             computer = rand.Next(5);
 
