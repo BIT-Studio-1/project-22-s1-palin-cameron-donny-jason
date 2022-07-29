@@ -203,10 +203,10 @@ namespace Group_Project
                         {
                             Console.WriteLine("The sound of you taking something makes the staff turn around, the found out you didn't belong in this office");
                             Console.WriteLine("The staff came to you with a wrench. You can only choose to fight.");
-                            attack(15);
+                            Attack(15);
                             staff = false;
                         }
-                        if (death != true)
+                        if (!death)
                         {
                             fail = true;
                         }
@@ -722,30 +722,75 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Pause();
             Console.Clear();
         }
-
+            
         //This is the attack method. I have reworked it so that there is a global player health variable. This means the method can be used again if needed. It also takes input for the computer health now
         //The idea is at base level it is simply attack and defence with a higher roll needed to hit if you are attacking someone defending. You can also pick up the knife or the crowbar which increase your damage
-        public static void attack(int compHP)
+        public static void Attack(int compHP)
         {
             bool done = false;
             int i = 0;
             string weapon;
-            do
+            int playerDMG;
+            int computerAction; 
+            Random rand = new Random();
+            do //The loop for checking if there is a weapon in players inventory. Both weapons do the same damage so the first one found is used
             {
                 if (inventory[i] == "crowbar" || inventory[i] == "knife")
                 {
                     weapon = "a " + inventory[i];
                     Console.WriteLine($"You have a {weapon} that can help you in the battle");
                     done = true;
+                    playerDMG = 5;
                 }
                 i++;
                 if (i > inventory.Length)
                 { 
                     done = true;
                     weapon = "your fists";
+                    playerDMG = 2;
                 }
             } while (!done);
 
+            done = false;
+            do
+            {
+                computerAction = rand.Next(0,2); // 0 is attack, 1 is defend
+                Console.WriteLine("Would you like to attack or defend?");
+                switch (Console.ReadLine().ToLower())
+                {
+                    case "attack":
+                        if (computerAction == 0) //Both attack
+                        {
+                            
+                        }
+                        else //Human attack, computer defend
+                        {
+
+                        }
+                        break;
+                    case "defend":
+                        if (computerAction == 0) //Computer attack, Human defend
+                        {
+
+                        } else //Both defend
+                        {
+                            Console.WriteLine("You both warily defend yourself. (Both defend. No hitpoints lost)");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Unknown input. Please input again.");
+                        break;
+                }
+                if (compHP <= 0)
+                {
+
+                }
+                else if (playerHP <= 0)
+                {
+                    death = true;
+                    done = true;
+                }
+            } while (!done);
             //string answer;
             //int playeratt = 5;
             //int playerHP = 25;
