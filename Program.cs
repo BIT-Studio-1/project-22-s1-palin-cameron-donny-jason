@@ -15,6 +15,7 @@ namespace Group_Project
                 location = loc;
             }
         }
+        public static int playerHP = 20;
         public static string[] inventory = { " ", " ", " " };
 
         public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
@@ -202,7 +203,7 @@ namespace Group_Project
                         {
                             Console.WriteLine("The sound of you taking something makes the staff turn around, the found out you didn't belong in this office");
                             Console.WriteLine("The staff came to you with a wrench. You can only choose to fight.");
-                            attack();
+                            attack(15);
                             staff = false;
                         }
                         if (death != true)
@@ -722,9 +723,14 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Console.Clear();
         }
 
-
-        public static void attack()
+        //This is the attack method. I have reworked it so that there is a global player health variable. This means the method can be used again if needed. It also takes input for the computer health now
+        //The idea is that it is a attack triangle with 
+        public static void attack(int compHP)
         {
+
+
+
+
             //string answer;
             //int playeratt = 5;
             //int playerHP = 25;
