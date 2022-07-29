@@ -724,12 +724,27 @@ To pick up items you can use 'Pick up' rather than the item name.");
         }
 
         //This is the attack method. I have reworked it so that there is a global player health variable. This means the method can be used again if needed. It also takes input for the computer health now
-        //The idea is that it is a attack triangle with 
+        //The idea is at base level it is simply attack and defence with a higher roll needed to hit if you are attacking someone defending. You can also pick up the knife or the crowbar which increase your damage
         public static void attack(int compHP)
         {
-
-
-
+            bool done = false;
+            int i = 0;
+            string weapon;
+            do
+            {
+                if (inventory[i] == "crowbar" || inventory[i] == "knife")
+                {
+                    weapon = "a " + inventory[i];
+                    Console.WriteLine($"You have a {weapon} that can help you in the battle");
+                    done = true;
+                }
+                i++;
+                if (i > inventory.Length)
+                { 
+                    done = true;
+                    weapon = "your fists";
+                }
+            } while (!done);
 
             //string answer;
             //int playeratt = 5;
