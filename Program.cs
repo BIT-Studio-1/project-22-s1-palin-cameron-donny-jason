@@ -773,6 +773,16 @@ To pick up items you can use 'Pick up' rather than the item name.");
                             {
                                 Console.WriteLine("You swing and miss");
                             }
+                            toHit = rand.Next(0, 4);
+                            if (toHit >= 1)
+                            {
+                                Console.WriteLine("Your enemy strikes you and hits a solid blow");
+                                playerHP -= compDMG;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Your enemy swings and misses");
+                            }
                         }
                         else //Human attack, computer defend
                         {
