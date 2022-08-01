@@ -869,7 +869,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
             string applicationsPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
             string saveFilePath = Path.Combine(applicationsPath, name);
             StreamWriter sw = new StreamWriter(saveFilePath + ".txt");
-            sw.WriteLine("content"); // I was unable to find a way for us to be able to use this without getting errors
+            sw.WriteLine(applicationsPath); // I was unable to find a way for us to be able to use this without getting errors
             sw.Close();
         }
         public static void LoadData()
