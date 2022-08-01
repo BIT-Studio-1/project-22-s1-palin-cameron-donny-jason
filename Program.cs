@@ -823,7 +823,8 @@ To pick up items you can use 'Pick up' rather than the item name.");
                 }
                 if (compHP <= 0)
                 {
-
+                    Console.WriteLine("You finally fight off your assailant and leave them unconcious on the ground. They will hopefully be alright and not give you more trouble.");
+                    done = true;
                 }
                 else if (playerHP <= 0)
                 {
