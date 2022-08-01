@@ -730,6 +730,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
             bool done = false;
             int i = 0;
             string weapon;
+            string temp;
             int playerDMG = 0;
             int compDMG = 4;
             int computerAction;
@@ -748,17 +749,17 @@ To pick up items you can use 'Pick up' rather than the item name.");
                 if (i == inventory.Length)
                 { 
                     done = true;
-                    weapon = "your fists";
                     playerDMG = 4;
                 }
             } while (!done);
-
             done = false;
             do
             {
                 computerAction = rand.Next(0,2); // 0 is attack, 1 is defend
                 Console.WriteLine("Would you like to attack or defend?");
-                switch (Console.ReadLine().ToLower())
+                temp = Console.ReadLine().ToLower();
+                Console.Clear();
+                switch (temp)
                 {
                     case "attack":
                         if (computerAction == 0) //Both attack
