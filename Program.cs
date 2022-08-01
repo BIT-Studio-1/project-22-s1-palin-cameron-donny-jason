@@ -23,7 +23,7 @@ namespace Group_Project
         public static bool staff = true;
         public static bool death = false;
 
-        static void Main(string[] args)
+        static void Main()
         {
 
             #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
@@ -144,6 +144,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    case "save":
+                        SaveData();
+                        break;
                     default:
                         Console.Clear();
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
@@ -228,7 +231,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
-                    
+                    case "save":
+                        SaveData();
+                        break;
                     default:
                         Console.Clear();
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
@@ -308,6 +313,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    case "save":
+                        SaveData();
+                        break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
@@ -380,6 +388,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    case "save":
+                        SaveData();
+                        break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
@@ -447,6 +458,9 @@ namespace Group_Project
                     case "help":                //If they ask for help
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
+                        break;
+                    case "save":
+                        SaveData();
                         break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
@@ -574,6 +588,9 @@ namespace Group_Project
                     case "help":                //If they ask for help
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
+                        break;
+                    case "save":
+                        SaveData();
                         break;
                     default:
                         Console.Clear();
@@ -845,34 +862,15 @@ To pick up items you can use 'Pick up' rather than the item name.");
         }
         public static void SaveData()
         {
-            using (StreamWriter sw = new StreamWriter(name + ".fasv"))
-            {
-                foreach (System.Reflection.PropertyInfo stat in Main)
-                {
-                    sw.WriteLine(stat.GetValue(name));
-                }
-                sw.Close();
-            }
-
+            string applicationsPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
+            string saveFilePath = Path.Combine(applicationsPath, name);
+            StreamWriter sw = new StreamWriter(saveFilePath, true);
+            sw.WriteLine("content"); // I was unable to find a way for us to be able to use this without getting errors
+            sw.Close();
         }
         public static void LoadData()
         {
-            Console.WriteLine("Enter the name of the character to load as shown below.");
-            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory());
-            int SaveFiles = 0;
-            string DisplayName = " ";
-            int DisplayNameLength = 0;
-             foreach (var fi in di.GetFiles("*.fasv"))
-            {
-                SaveFiles++;
-                DisplayNameLength = fi.Name.Length;
-                DisplayName = fi.Name.Remove(DisplayNameLength - 5, 5);
-                Console.WriteLine(SaveFiles.ToString() + ". " + DisplayName);
-            }
-            string toLoad = Console.ReadLine();
-            using StreamReader sr = new StreamReader(toLoad + ".fasv");
-            name = sr.ReadLine();
-            sr.Close();
+                                                                   
         }
     }
 
