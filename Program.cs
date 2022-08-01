@@ -87,24 +87,7 @@ namespace Group_Project
                 Console.WriteLine("In front of you is a staircase and a short hallway leading to the front door.");
                 Console.WriteLine("To your right you can see a Electricity Distribution Room");
                 Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
-
-                Console.WriteLine("                                                                           --------------------------------");
-                Console.WriteLine("                                                                           |                               |");
-                Console.WriteLine("              ___________________________              ____________________| Electricity Disribution room  |");
-                Console.WriteLine("              |                         |             |                     /                              |");
-                Console.WriteLine("              |                         |_____________|                    |-------------------------------");
-                Console.WriteLine("              |                         |             |        office      |");
-                Console.WriteLine("              |         Laundry         |   Lounge   /          (you)      |");
-                Console.WriteLine("              |                         |             |____________________|");
-                Console.WriteLine("              |                          /____________|        |===|");
-                Console.WriteLine("              |_________________________|                      |===|");
-                Console.WriteLine("                                                               |===|");
-                Console.WriteLine("                                                         ______|===|_____");
-                Console.WriteLine("                                                        |                |");
-                Console.WriteLine("                                                        |      Attic     |");
-                Console.WriteLine("                                                        |________________|");
-                Console.WriteLine("");
-
+                
                 Console.WriteLine(items);
                 Console.Write($"Where do you want to go {name}: ");
                 temp = Console.ReadLine().ToLower(); //Gets the command
