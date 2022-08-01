@@ -722,6 +722,49 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Console.Clear();
         }
 
+        //User Powerup and prep
+        static void PowerUp()
+        {
+            Console.WriteLine("=========================================");
+            Console.WriteLine("==  Successful survived from the dark  ==");
+            Console.WriteLine("=========================================");
+            temp = Console.ReadLine();
+
+            while (true)
+            {
+                Console.WriteLine("============================================");
+                Console.WriteLine("==            Entering the city           ==");
+                Console.WriteLine("==   1: Booking a room and have a rest    ==");
+                Console.WriteLine("==         2: Go and get HP energy        ==");
+                Console.WriteLine("==   3: Buy tools knifes, rods and fire   ==");
+                Console.WriteLine("============================================");
+                switch (temp)
+                {
+                    case "1":
+                        HP = HP + 40;
+                        break;
+
+                    case "2":
+                        HP = HP + 40;
+                        break;
+
+                    case "3":
+                        Console.WriteLine("tools packed");
+                        break;
+
+                    default:
+                        Console.WriteLine("==============================");
+                        Console.WriteLine("==  Continuing the journey  ==");
+                        Console.WriteLine("==============================");
+                        break;
+                }
+                Console.ReadLine();
+                Warehouse();
+            }
+
+        }//End of PowerUp
+
+       
 
         public static void attack()
         {
