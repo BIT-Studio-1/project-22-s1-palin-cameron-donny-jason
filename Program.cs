@@ -843,13 +843,36 @@ To pick up items you can use 'Pick up' rather than the item name.");
             } while (isNumber == false);
             return tempint;
         }
-        public static void Save()
+        public static void SaveData()
         {
+            using (StreamWriter sw = new StreamWriter(name + ".fasv"))
+            {
+                foreach (System.Reflection.PropertyInfo stat in Main)
+                {
+                    sw.WriteLine(stat.GetValue(name));
+                }
+                sw.Close();
+            }
 
         }
-        public static void Load()
+        public static void LoadData()
         {
-
+            Console.WriteLine("Enter the name of the character to load as shown below.");
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory());
+            int SaveFiles = 0;
+            string DisplayName = " ";
+            int DisplayNameLength = 0;
+             foreach (var fi in di.GetFiles("*.fasv"))
+            {
+                SaveFiles++;
+                DisplayNameLength = fi.Name.Length;
+                DisplayName = fi.Name.Remove(DisplayNameLength - 5, 5);
+                Console.WriteLine(SaveFiles.ToString() + ". " + DisplayName);
+            }
+            string toLoad = Console.ReadLine();
+            using StreamReader sr = new StreamReader(toLoad + ".fasv");
+            name = sr.ReadLine();
+            sr.Close();
         }
     }
 
