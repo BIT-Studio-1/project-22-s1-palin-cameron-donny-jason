@@ -786,6 +786,31 @@ To pick up items you can use 'Pick up' rather than the item name.");
                 Console.WriteLine("==                 2: Go on my own and try it.                ==");
                 Console.WriteLine("================================================================");
             }
+
+            string temp = Console.ReadLine();
+            switch (temp)
+            {
+                case "1":
+                    answer = true;
+                    Console.WriteLine("************************************");
+                    Console.WriteLine("**  Asking for sales assistances  **");
+                    Console.WriteLine("************************************");
+                    break;
+
+                case "2":
+                    answer = false;
+                    Console.WriteLine("********************************");
+                    Console.WriteLine("**   Go on my own and try it  **");
+                    Console.WriteLine("********************************");
+                    break;
+
+                default:
+                    Console.WriteLine("*******************************************");
+                    Console.WriteLine("**  My costume well fitted and spot on!  **");
+                    Console.WriteLine("*******************************************");
+                    break;
+            }
+            Console.ReadLine();
         }//End of Warehouse
 
 
