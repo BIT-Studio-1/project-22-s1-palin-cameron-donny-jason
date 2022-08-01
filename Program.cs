@@ -763,6 +763,16 @@ To pick up items you can use 'Pick up' rather than the item name.");
                     case "attack":
                         if (computerAction == 0) //Both attack
                         {
+                            toHit = rand.Next(0, 4);
+                            if (toHit >= 1)
+                            {
+                                Console.WriteLine("You strike your enemy and hit a solid blow");
+                                compHP -= playerDMG;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You swing and miss");
+                            }
                         }
                         else //Human attack, computer defend
                         {
