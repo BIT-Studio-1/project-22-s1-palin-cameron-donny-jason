@@ -840,8 +840,12 @@ To pick up items you can use 'Pick up' rather than the item name.");
         public static void NameWelcome()
         {
             Console.WriteLine("Welcome To The Game");
-            Console.Write("Please Enter Your Player Name: ");
+            Console.Write("Please Enter Your Player Name or type load to load you last save: ");
             name = Console.ReadLine();
+            if(name=="load")
+            {
+                LoadData();
+            }
             Console.Clear();
         }
         public static int EnterInt(string desc) //Inputting, checking, and converting ints. You have to customize the input when calling.
