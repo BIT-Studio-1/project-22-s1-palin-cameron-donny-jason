@@ -745,7 +745,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
                     playerDMG = 6;
                 }
                 i++;
-                if (i > inventory.Length)
+                if (i == inventory.Length)
                 { 
                     done = true;
                     weapon = "your fists";
