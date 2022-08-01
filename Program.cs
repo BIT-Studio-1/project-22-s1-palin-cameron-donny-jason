@@ -730,8 +730,10 @@ To pick up items you can use 'Pick up' rather than the item name.");
             bool done = false;
             int i = 0;
             string weapon;
-            int playerDMG;
-            int computerAction; 
+            int playerDMG = 0;
+            int compDMG = 4;
+            int computerAction;
+            int toHit;
             Random rand = new Random();
             do //The loop for checking if there is a weapon in players inventory. Both weapons do the same damage so the first one found is used
             {
@@ -740,14 +742,14 @@ To pick up items you can use 'Pick up' rather than the item name.");
                     weapon = "a " + inventory[i];
                     Console.WriteLine($"You have a {weapon} that can help you in the battle");
                     done = true;
-                    playerDMG = 5;
+                    playerDMG = 6;
                 }
                 i++;
                 if (i > inventory.Length)
                 { 
                     done = true;
                     weapon = "your fists";
-                    playerDMG = 2;
+                    playerDMG = 4;
                 }
             } while (!done);
 
@@ -761,20 +763,28 @@ To pick up items you can use 'Pick up' rather than the item name.");
                     case "attack":
                         if (computerAction == 0) //Both attack
                         {
-                            
                         }
                         else //Human attack, computer defend
                         {
-
                         }
                         break;
                     case "defend":
                         if (computerAction == 0) //Computer attack, Human defend
                         {
+                            toHit = rand.Next(0,4);
+                            if (toHit >= 2)
+                            {
+                                Console.WriteLine("Your enemy strikes you and hits a glancing blow");
+                                playerHP -= compDMG/2;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Your enemy swings at you and misses");
+                            }
 
                         } else //Both defend
                         {
-                            Console.WriteLine("You both warily defend yourself. (Both defend. No hitpoints lost)");
+                            Console.WriteLine("You both warily defend yourself");
                         }
                         break;
                     default:
