@@ -843,6 +843,14 @@ To pick up items you can use 'Pick up' rather than the item name.");
             } while (isNumber == false);
             return tempint;
         }
+        public static void Save()
+        {
+
+        }
+        public static void Load()
+        {
+
+        }
     }
 
 }
