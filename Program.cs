@@ -88,9 +88,9 @@ namespace Group_Project
                 Console.WriteLine("To your right you can see a Electricity Distribution Room");
                 Console.WriteLine("To your left you see a door leading to who knows what, and there is another door behind you\n");
 
-                Console.WriteLine("                                                                           --------------------------------");
+                Console.WriteLine("                                                                            -------------------------------");
                 Console.WriteLine("                                                                           |                               |");
-                Console.WriteLine("              ___________________________              ____________________| Electricity Disribution room  |");
+                Console.WriteLine("               _________________________               ____________________| Electricity Disribution room  |");
                 Console.WriteLine("              |                         |             |                     /                              |");
                 Console.WriteLine("              |                         |_____________|                    |-------------------------------");
                 Console.WriteLine("              |                         |             |        office      |");
