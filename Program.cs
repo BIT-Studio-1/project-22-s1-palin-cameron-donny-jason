@@ -22,6 +22,7 @@ namespace Group_Project
         public static bool safe = false;
         public static bool staff = true;
         public static bool death = false;
+        public static int checkpoint;
 
         static void Main()
         {
@@ -77,6 +78,7 @@ namespace Group_Project
     
         public static void Office()
         {
+            checkpoint = 1;
             bool fail;
             string temp, room = "Office", items;
             string[] itemInRoom = new string[0];
@@ -154,6 +156,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 1;
         }
 
         public static void ElectricityDistributionRoom()
@@ -241,6 +244,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 2;
         }
 
         public static void Lounge()
@@ -322,6 +326,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 3;
         }
 
         public static void Laundry()
@@ -397,6 +402,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 4;
         }
         public static void Attic()
         {
@@ -468,6 +474,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 5;
         }
         public static void Study()
         {
@@ -599,6 +606,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            checkpoint = 6;
         }
         public static void Safe()
         {
@@ -868,13 +876,13 @@ To pick up items you can use 'Pick up' rather than the item name.");
         {
             string applicationsPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
             string saveFilePath = Path.Combine(applicationsPath, name);
-            StreamWriter sw = new StreamWriter(saveFilePath + ".txt");
-            sw.WriteLine(applicationsPath); // I was unable to find a way for us to be able to use this without getting errors
+            StreamWriter sw = new StreamWriter(@"save.txt");
+            sw.WriteLine(checkpoint); // I was unable to find a way for us to be able to use this without getting errors
             sw.Close();
         }
         public static void LoadData()
         {
-            StreamReader sr = new StreamReader(@"*.txt");
+            StreamReader sr = new StreamReader(@"save.txt");
             string aline;
             while(!sr.EndOfStream)
             {
