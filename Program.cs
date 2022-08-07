@@ -729,7 +729,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
         {
             bool done = false;
             int i = 0;
-            string weapon;
+            string weapon = "";
             string temp;
             int playerDMG = 0;
             int compDMG = 4;
@@ -738,16 +738,24 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Random rand = new Random();
             do //The loop for checking if there is a weapon in players inventory. Both weapons do the same damage so the first one found is used
             {
-                if (inventory[i] == "crowbar" || inventory[i] == "knife")
+                if (inventory[i] == "knife" || inventory[i] == "fire extinguisher")
                 {
                     weapon = "a " + inventory[i];
-                    Console.WriteLine($"You have a {weapon} that can help you in the battle");
+                    Console.WriteLine($"You have {weapon} that can help you in the battle");
                     done = true;
                     playerDMG = 6;
                 }
+                else if (inventory[i] == "crowbar" && weapon != "")
+                {
+                    weapon = "a " + inventory[i];
+                    Console.WriteLine($"You have {weapon} that can help you in the battle");
+                    done = true;
+                    playerDMG = 5;
+                }
                 i++;
-                if (i == inventory.Length)
-                { 
+                if (i == inventory.Length && !done)
+                {
+                    weapon = "your fists";
                     done = true;
                     playerDMG = 4;
                 }
@@ -762,12 +770,14 @@ To pick up items you can use 'Pick up' rather than the item name.");
                 switch (temp)
                 {
                     case "attack":
+                    case "a":
+                    case "atk":
                         if (computerAction == 0) //Both attack
                         {
                             toHit = rand.Next(0, 4);
                             if (toHit >= 1)
                             {
-                                Console.WriteLine("You strike your enemy and hit a solid blow");
+                                Console.WriteLine($"You strike your enemy with {weapon} and hit a solid blow");
                                 compHP -= playerDMG;
                             }
                             else
@@ -790,7 +800,7 @@ To pick up items you can use 'Pick up' rather than the item name.");
                             toHit = rand.Next(0, 4);
                             if (toHit >= 2)
                             {
-                                Console.WriteLine("You strike your enemy and hit a glancing blow");
+                                Console.WriteLine($"You strike your enemy with {weapon} and hit a glancing blow");
                                 compHP -= playerDMG / 2;
                             }
                             else
@@ -800,6 +810,8 @@ To pick up items you can use 'Pick up' rather than the item name.");
                         }
                         break;
                     case "defend":
+                    case "d":
+                    case "def":
                         if (computerAction == 0) //Computer attack, Human defend
                         {
                             toHit = rand.Next(0,4);
