@@ -722,6 +722,97 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Console.Clear();
         }
 
+        //User Powerup and prep
+        static void PowerUp()
+        {
+            Console.WriteLine("=========================================");
+            Console.WriteLine("==  Successful survived from the dark  ==");
+            Console.WriteLine("=========================================");
+            temp = Console.ReadLine();
+
+            while (true)
+            {
+                Console.WriteLine("============================================");
+                Console.WriteLine("==            Entering the city           ==");
+                Console.WriteLine("==   1: Booking a room and have a rest    ==");
+                Console.WriteLine("==         2: Go and get HP energy        ==");
+                Console.WriteLine("==   3: Buy tools knifes, rods and fire   ==");
+                Console.WriteLine("============================================");
+                switch (temp)
+                {
+                    case "1":
+                        HP = HP + 40;
+                        break;
+
+                    case "2":
+                        HP = HP + 40;
+                        break;
+
+                    case "3":
+                        Console.WriteLine("tools packed");
+                        break;
+
+                    default:
+                        Console.WriteLine("==============================");
+                        Console.WriteLine("==  Continuing the journey  ==");
+                        Console.WriteLine("==============================");
+                        break;
+                }
+                Console.ReadLine();
+                Warehouse();
+            }
+        }//End of PowerUp
+
+        //Warehouse 
+        static void Warehouse()
+        {
+            Console.WriteLine("========================================");
+            Console.WriteLine("==  We on the halfway on the journey  ==");
+            Console.WriteLine("========================================");
+            bool answer = false;
+
+            while (answer == false)
+
+            {
+                Console.WriteLine("================================================================");
+                Console.WriteLine("==          Go on the map! and search if there's              ==");
+                Console.WriteLine("==           any warehouse near, we need to change            ==");
+                Console.WriteLine("==        some costume. Yes! Here is it. Go on 300 km         ==");
+                Console.WriteLine("==           Put it the GPS, Oh yeah! We get it here.         ==");
+                Console.WriteLine("==    Umm what a big warehouse. Surely got need new costume.  ==");
+                Console.WriteLine("==            Lets enter the door and see.                    ==");
+                Console.WriteLine("================================================================");
+                Console.WriteLine("==                 1: Asking for sales assistance.            ==");
+                Console.WriteLine("==                 2: Go on my own and try it.                ==");
+                Console.WriteLine("================================================================");
+            }
+
+            string temp = Console.ReadLine();
+            switch (temp)
+            {
+                case "1":
+                    answer = true;
+                    Console.WriteLine("************************************");
+                    Console.WriteLine("**  Asking for sales assistances  **");
+                    Console.WriteLine("************************************");
+                    break;
+
+                case "2":
+                    answer = false;
+                    Console.WriteLine("********************************");
+                    Console.WriteLine("**   Go on my own and try it  **");
+                    Console.WriteLine("********************************");
+                    break;
+
+                default:
+                    Console.WriteLine("*******************************************");
+                    Console.WriteLine("**  My costume well fitted and spot on!  **");
+                    Console.WriteLine("*******************************************");
+                    break;
+            }
+            Console.ReadLine();
+        }//End of Warehouse
+
 
         public static void attack()
         {
