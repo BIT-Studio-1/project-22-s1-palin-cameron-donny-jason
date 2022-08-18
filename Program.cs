@@ -22,8 +22,9 @@ namespace Group_Project
         public static bool safe = false;
         public static bool staff = true;
         public static bool death = false;
+        //public static int checkpoint;
 
-        static void Main(string[] args)
+        static void Main()
         {
 
             #pragma warning disable CA1416 // Validate platform compatibility  // Removes the pesky warnings.
@@ -77,6 +78,7 @@ namespace Group_Project
     
         public static void Office()
         {
+            //checkpoint = 1;
             bool fail;
             string temp, room = "Office", items;
             string[] itemInRoom = new string[0];
@@ -144,6 +146,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.Clear();
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
@@ -151,6 +156,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 1;
         }
 
         public static void ElectricityDistributionRoom()
@@ -228,7 +234,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
-                    
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.Clear();
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
@@ -236,6 +244,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 2;
         }
 
         public static void Lounge()
@@ -308,12 +317,16 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 3;
         }
 
         public static void Laundry()
@@ -380,12 +393,16 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 4;
         }
         public static void Attic()
         {
@@ -448,12 +465,16 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips."); //Default if they don't put anything userful in
                         fail = true;            //Making sure it loops again
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 5;
         }
         public static void Study()
         {
@@ -575,6 +596,9 @@ namespace Group_Project
                         Help();                 //Sending them to the help menu
                         fail = true;            //Making sure it loops again
                         break;
+                    //case "save":
+                        //SaveData();
+                        //break;
                     default:
                         Console.Clear();
                         Console.WriteLine("I can't understand that input. Please try again or type help for tips.\n"); //Default if they don't put anything userful in
@@ -582,6 +606,7 @@ namespace Group_Project
                         break;
                 }
             } while (fail == true);             //Looping again if needed
+            //checkpoint = 6;
         }
         public static void Safe()
         {
@@ -823,8 +848,12 @@ To pick up items you can use 'Pick up' rather than the item name.");
         public static void NameWelcome()
         {
             Console.WriteLine("Welcome To The Game");
-            Console.Write("Please Enter Your Player Name: ");
+            Console.Write("Please Enter Your Player Name or type load to load you last save: ");
             name = Console.ReadLine();
+           //if(name=="load")
+            //{
+                //LoadData();
+           // }
             Console.Clear();
         }
         public static int EnterInt(string desc) //Inputting, checking, and converting ints. You have to customize the input when calling.
@@ -843,6 +872,25 @@ To pick up items you can use 'Pick up' rather than the item name.");
             } while (isNumber == false);
             return tempint;
         }
+        //public static void SaveData()
+        //{
+            //string applicationsPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
+            //string saveFilePath = Path.Combine(applicationsPath, name);
+            //StreamWriter sw = new StreamWriter(@"save.txt");
+            //sw.WriteLine(checkpoint); // I was unable to find a way for us to be able to use this without getting errors
+            //sw.Close();
+        //}
+        //public static void LoadData()
+        //{
+            //StreamReader sr = new StreamReader(@"save.txt");
+            //string aline;
+            //while(!sr.EndOfStream)
+            //{
+                //aline = sr.ReadLine();
+                //Console.WriteLine(aline);
+            //}
+            //sr.Close();
+        //}
     }
 
 }
