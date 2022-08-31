@@ -15,6 +15,7 @@ namespace Group_Project
                 location = loc;
             }
         }
+        public static int playerHP = 20;
         public static string[] inventory = { " ", " ", " " };
 
         public static Item[] items = { new Item("key", "Office"),new Item ("knife", "Lounge"),new Item("lighter", "Lounge"), new Item("crowbar", "Attic"), new Item("evidence", "Safe"), new Item("fire extinguisher", "Electricity Distribution Room"),new Item("flashlight", "Electricity Distribution Room") };
@@ -202,10 +203,10 @@ namespace Group_Project
                         {
                             Console.WriteLine("The sound of you taking something makes the staff turn around, the found out you didn't belong in this office");
                             Console.WriteLine("The staff came to you with a wrench. You can only choose to fight.");
-                            attack();
+                            Attack(15);
                             staff = false;
                         }
-                        if (death != true)
+                        if (!death)
                         {
                             fail = true;
                         }
@@ -721,103 +722,129 @@ To pick up items you can use 'Pick up' rather than the item name.");
             Pause();
             Console.Clear();
         }
-
-
-        public static void attack()
+            
+        //This is the attack method. I have reworked it so that there is a global player health variable. This means the method can be used again if needed. It also takes input for the computer health now
+        //The idea is at base level it is simply attack and defence with a higher roll needed to hit if you are attacking someone defending. You can also pick up the knife or the crowbar which increase your damage
+        public static void Attack(int compHP)
         {
-            string answer;
-            int playeratt, playerHP, computeratt, computerHP, computer;
-            playeratt = 5;
-            playerHP = 25;
-            computerHP = 25;
-
+            bool done = false;
+            int i = 0;
+            string weapon = "";
+            string temp;
+            int playerDMG = 0;
+            int compDMG = 4;
+            int computerAction;
+            int toHit;
             Random rand = new Random();
-            computer = rand.Next(5);
-
-            switch (computer)
+            do //The loop for checking if there is a weapon in players inventory. Both weapons do the same damage so the first one found is used
             {
-                case 0:
-                    Console.WriteLine("computer attack");
-                    break;
-                case 1:
-                    Console.WriteLine("computer attack");
-                    break;
-                case 2:
-                    Console.WriteLine("computer attack");
-                    break;
-                case 3:
-                    Console.WriteLine("computer attack");
-                    break;
-                case 4:
-                    Console.WriteLine("computer defense");
-                    break;
-            }
-
-
-            while ((computerHP > 0) && (playerHP > 0))
+                if (inventory[i] == "knife" || inventory[i] == "fire extinguisher")
+                {
+                    weapon = "a " + inventory[i];
+                    Console.WriteLine($"You have {weapon} that can help you in the battle");
+                    done = true;
+                    playerDMG = 6;
+                }
+                else if (inventory[i] == "crowbar" && weapon != "")
+                {
+                    weapon = "a " + inventory[i];
+                    Console.WriteLine($"You have {weapon} that can help you in the battle");
+                    done = true;
+                    playerDMG = 5;
+                }
+                i++;
+                if (i == inventory.Length && !done)
+                {
+                    weapon = "your fists";
+                    done = true;
+                    playerDMG = 4;
+                }
+            } while (!done);
+            done = false;
+            do
             {
-
-                computeratt = rand.Next(1, 6);
-                Console.WriteLine($"Now, enemy hp is {computerHP:D2}");
-                Console.WriteLine("you want to attack or defend: ");
-                answer = Console.ReadLine();
-                computer = rand.Next(5);
-                switch (answer)
+                computerAction = rand.Next(0,2); // 0 is attack, 1 is defend
+                Console.WriteLine("Would you like to attack or defend?");
+                temp = Console.ReadLine().ToLower();
+                Console.Clear();
+                switch (temp)
                 {
                     case "attack":
-                        if ((computer == 0) || (computer == 1) || (computer == 2) || (computer == 3))
+                    case "a":
+                    case "atk":
+                        if (computerAction == 0) //Both attack
                         {
-                            playerHP = playerHP - computeratt;
-                            computerHP = computerHP - playeratt;
-                            Console.WriteLine("you choose attack");
-                            Console.WriteLine($"Enemy attack is {computeratt:D2}");
-                            Console.WriteLine($"your hp is {playerHP:D2}");
-                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                            toHit = rand.Next(0, 4);
+                            if (toHit >= 1)
+                            {
+                                Console.WriteLine($"You strike your enemy with {weapon} and hit a solid blow");
+                                compHP -= playerDMG;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You swing and miss");
+                            }
+                            toHit = rand.Next(0, 4);
+                            if (toHit >= 1)
+                            {
+                                Console.WriteLine("Your enemy strikes you and hits a solid blow");
+                                playerHP -= compDMG;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Your enemy swings and misses");
+                            }
                         }
-                        else
+                        else //Human attack, computer defend
                         {
-                            playerHP = playerHP - 0;
-                            computerHP = computerHP - 0;
-                            Console.WriteLine("The enemy resisted the attack");
-                            Console.WriteLine($"your hp is {playerHP:D2}");
-                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                            toHit = rand.Next(0, 4);
+                            if (toHit >= 2)
+                            {
+                                Console.WriteLine($"You strike your enemy with {weapon} and hit a glancing blow");
+                                compHP -= playerDMG / 2;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You swing and miss");
+                            }
                         }
                         break;
                     case "defend":
-                        if (computer == 4)
+                    case "d":
+                    case "def":
+                        if (computerAction == 0) //Computer attack, Human defend
                         {
-                            playerHP = playerHP - 0;
-                            computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defend");
-                            Console.WriteLine($"Enemy choose defend");
-                            Console.WriteLine($"your hp is {playerHP:D2}");
-                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
-                        }
-                        else
+                            toHit = rand.Next(0,4);
+                            if (toHit >= 2)
+                            {
+                                Console.WriteLine("Your enemy strikes you and hits a glancing blow");
+                                playerHP -= compDMG/2;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Your enemy swings at you and misses");
+                            }
+
+                        } else //Both defend
                         {
-                            playerHP = playerHP - 0;
-                            computerHP = computerHP - 0;
-                            Console.WriteLine("you choose defend");
-                            Console.WriteLine($"Enemy attack is {computeratt:D2}");
-                            Console.WriteLine($"your hp is {playerHP:D2}");
-                            Console.WriteLine($"Enemy hp is {computerHP:D2}");
+                            Console.WriteLine("You both warily defend yourself");
                         }
                         break;
+                    default:
+                        Console.WriteLine("Unknown input. Please input again.");
+                        break;
                 }
-
-            }
-            if (computerHP == 0)
-            {
-                Console.WriteLine("You win");
-
-            }
-            else if (playerHP == 0)
-            {
-                Console.WriteLine("You have died");
-                death = true;
-            }
-            Console.WriteLine($"your hp is {playerHP:D2}");
-            Console.ReadLine();
+                if (compHP <= 0)
+                {
+                    Console.WriteLine("You finally fight off your assailant and leave them unconcious on the ground. They will hopefully be alright and not give you more trouble.");
+                    done = true;
+                }
+                else if (playerHP <= 0)
+                {
+                    death = true;
+                    done = true;
+                }
+            } while (!done);
         }
 
         public static void NameWelcome()
